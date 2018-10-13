@@ -55,7 +55,10 @@ namespace CH21Tests
         private void BuildFibNums(int n)
         {
             Nums = new List<int>();
-            for (var i = 0; i < n; i++) Nums.Add(FibValue(i));
+            for (var i = 0; i < n; i++)
+            {
+                Nums.Add(FibValue(i));
+            }
         }
     }
 }
