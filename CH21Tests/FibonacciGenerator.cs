@@ -46,8 +46,7 @@ namespace CH21Tests
         {
             if (!_cache.ContainsKey(key))
             {
-                var value = FibonacciNumber(key);
-                _cache[key] = value;
+                _cache[key] = FibonacciNumber(key);
             }
 
             return _cache[key];
