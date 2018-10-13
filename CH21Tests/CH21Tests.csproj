@@ -53,6 +53,7 @@
     <Compile Include="FibonacciGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FibonacciGeneratorTest.cs" />
+    <Compile Include="CH21_4Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
