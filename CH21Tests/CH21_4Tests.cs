@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,16 +9,14 @@ namespace CH21Tests
     [TestClass]
     public class CH21_4Tests
     {
-
-        static int HashToIndex<T>(T val, int arraySize)
+        private static int HashToIndex<T>(T val, int arraySize)
         {
             return Math.Abs(val.GetHashCode()) % arraySize;
         }
 
-        static void Insert<T>(IList<T> items, T item)
+        private static void Insert<T>(IList<T> items, T item)
         {
             var index = HashToIndex(item, items.Count);
-            Console.WriteLine($"Trying to put {item} into pos {index}");
             items[index] = item;
         }
 
@@ -61,27 +59,30 @@ namespace CH21Tests
             buf.Clear();
             foreach (var v in d.Values) buf.Append(v);
             Assert.AreEqual("1223", buf.ToString());
-
         }
 
         [TestMethod]
         public void HashToIndexTest()
         {
+            var hash = new string[8];
+            Insert(hash, "A_One");
+            Insert(hash, "B_Two");
+            Insert(hash, "C_Three");
+            Insert(hash, "D_Four");
+            Insert(hash, "E_Five");
+            Insert(hash, "F_Six");
+            Insert(hash, "G_Seven");
+            Insert(hash, "H_Eight");
+            Insert(hash, "I_Nine");
+            Insert(hash, "J_Ten");
+            Insert(hash, "K_Eleven");
 
-            var hash = new string[11];
-            Insert(hash, "One");
-            Insert(hash, "Two");
-            Insert(hash, "Three");
-            Insert(hash, "Four");
-            Insert(hash, "Five");
-            Insert(hash, "Six");
-            Insert(hash, "Seven");
-            Insert(hash, "Eight");
-            Insert(hash, "Nine");
-            Insert(hash, "Ten");
-            Insert(hash, "Eleven");
-
+            var items = hash
+                .Select(a => { Console.WriteLine(a??"-"); return a; })
+                .Where(n => !string.IsNullOrEmpty(n))
+                .Select(n => n)
+                .OrderBy(n => n)
+                .ToList();
         }
-
     }
 }
