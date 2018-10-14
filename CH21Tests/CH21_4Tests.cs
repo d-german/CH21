@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,6 +9,19 @@ namespace CH21Tests
     [TestClass]
     public class CH21_4Tests
     {
+
+        static int HashToIndex<T>(T val, int arraySize)
+        {
+            return Math.Abs(val.GetHashCode()) % arraySize;
+        }
+
+        static void Insert<T>(IList<T> items, T item)
+        {
+            var index = HashToIndex(item, items.Count);
+            Console.WriteLine($"Trying to put {item} into pos {index}");
+            items[index] = item;
+        }
+
         [TestMethod]
         public void TestAddUpdateDictTest()
         {
@@ -48,5 +63,25 @@ namespace CH21Tests
             Assert.AreEqual("1223", buf.ToString());
 
         }
+
+        [TestMethod]
+        public void HashToIndexTest()
+        {
+
+            var hash = new string[11];
+            Insert(hash, "One");
+            Insert(hash, "Two");
+            Insert(hash, "Three");
+            Insert(hash, "Four");
+            Insert(hash, "Five");
+            Insert(hash, "Six");
+            Insert(hash, "Seven");
+            Insert(hash, "Eight");
+            Insert(hash, "Nine");
+            Insert(hash, "Ten");
+            Insert(hash, "Eleven");
+
+        }
+
     }
 }
