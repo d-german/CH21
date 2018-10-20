@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CH21Tests
 {
     [TestClass]
-    public class CH21_4Tests
+    public class CH21_04Tests
     {
         private static int HashToIndex<T>(T val, int arraySize)
         {

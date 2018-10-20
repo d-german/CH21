@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CH21Tests
 {
     [TestClass]
-    public class CH21_3Tests
+    public class CH21_03Tests
     {
         private static readonly int _searchValue;
         private static readonly int[] _sortedValues;
@@ -13,7 +13,7 @@ namespace CH21Tests
         private static readonly int[] _values;
         private const int Max = 10000000;
 
-        static CH21_3Tests()
+        static CH21_03Tests()
         {
             _values = GetRandomArray();
             _searchValue = _values[new Random().Next(0, Max -1)];

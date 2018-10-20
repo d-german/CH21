@@ -49,12 +49,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CH21_3Tests.cs" />
+    <Compile Include="CH21_03Tests.cs" />
+    <Compile Include="CH21_11Tests.cs" />
     <Compile Include="FibonacciGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FibonacciGeneratorTest.cs" />
-    <Compile Include="CH21_4Tests.cs" />
-    <Compile Include="CH21_8Tests.cs" />
+    <Compile Include="CH21_04Tests.cs" />
+    <Compile Include="CH21_08Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

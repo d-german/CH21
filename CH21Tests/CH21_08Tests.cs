@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CH21Tests
 {
     [TestClass]
-    public class CH21_8Tests
+    public class CH21_08Tests
     {
         public delegate bool NumberPredicate(int number);
 
