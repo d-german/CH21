@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,7 +13,8 @@ namespace CH21Tests
             new Person {Name = "Dick", Age = 5},
             new Person {Name = "Harry", Age = 5},
             new Person {Name = "Mary", Age = 5},
-            new Person {Name = "Jay", Age = 20}
+            new Person {Name = "Jay", Age = 20},
+            new Person {Name = "George", Age = 20}
         };
 
         private readonly List<int> _values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
@@ -31,7 +31,7 @@ namespace CH21Tests
         public void AggregateSumPersonsAges()
         {
             var sum = _persons.Aggregate(0, (x, p) => x + p.Age);
-            Assert.AreEqual(45, sum);
+            Assert.AreEqual(65, sum);
         }
 
         [TestMethod]
@@ -87,6 +87,21 @@ namespace CH21Tests
         }
 
         [TestMethod]
+        public void NamesBiggerThan3LettersTest()
+        {
+            var query = _persons
+                .Select(person => new {nameLength = person.Name.Length, person})
+                .Where(x => x.nameLength > 3)
+                .OrderBy(x => x.nameLength)
+                .ThenBy(x => x.person.Age)
+                .Select(x => x.person);
+
+            Assert.AreEqual(
+                "[ Name:=Dick, Age=5 ], [ Name:=Mary, Age=5 ], [ Name:=Harry, Age=5 ], [ Name:=George, Age=20 ],",
+                query.Display());
+        }
+
+        [TestMethod]
         public void TakeZipToPersons()
         {
             var query = _values
@@ -136,24 +151,5 @@ namespace CH21Tests
     }
 
 
-    internal class Person
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-
-        public override string ToString()
-        {
-            return $"[ Name:={Name}, Age={Age} ],";
-        }
-    }
-
-    // declares an extension method 
-    internal static class Extensions
-    {
-        // extension method that displays all elements separated by spaces
-        public static string Display<T>(this IEnumerable<T> data)
-        {
-            return string.Join(" ", data);
-        }
-    }
+     
 }
