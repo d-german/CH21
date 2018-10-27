@@ -87,6 +87,20 @@ namespace CH21Tests
         }
 
         [TestMethod]
+        public void AnonymousTypes()
+        {
+            const int currentYear = 2018;
+            var query = _persons
+                .Select(p => new {Name = p.Name, BirthYear = currentYear - p.Age})
+                .OrderBy(p => p.BirthYear)
+                .ThenBy(p => p.Name);
+
+            Assert.AreEqual(
+                "{ Name = George, BirthYear = 1998 } { Name = Jay, BirthYear = 1998 } { Name = Tom, BirthYear = 2008 } { Name = Dick, BirthYear = 2013 } { Name = Harry, BirthYear = 2013 } { Name = Mary, BirthYear = 2013 }",
+                query.Display());
+        }
+
+        [TestMethod]
         public void NamesBiggerThan3LettersTest()
         {
             var query = _persons
