@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -63,6 +64,40 @@ namespace CH21Tests
         }
 
         [TestMethod]
+        public void FirstTest()
+        {
+            var evenValueQuery = _values
+                .Where(value => value % 2 == 0) // find even integers
+                .OrderBy(value => value)
+                .First();
+
+            Assert.AreEqual(2, evenValueQuery);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FirstFailTest()
+        {
+            var value = _values
+                .Where(v => v > 100)
+                .OrderBy(v => v)
+                .First();
+
+            Assert.AreEqual(2, value);
+        }
+
+        [TestMethod]
+        public void FirstOrDefaultTest()
+        {
+            var value = _values
+                .Where(v => v > 100)
+                .OrderBy(v => v)
+                .FirstOrDefault();
+
+            Assert.AreEqual(0, value);
+        }
+
+        [TestMethod]
         public void OddValuesMulBy10AndOrder()
         {
             var query = _values
@@ -91,7 +126,7 @@ namespace CH21Tests
         {
             const int currentYear = 2018;
             var query = _persons
-                .Select(p => new {Name = p.Name, BirthYear = currentYear - p.Age})
+                .Select(p => new {p.Name, BirthYear = currentYear - p.Age})
                 .OrderBy(p => p.BirthYear)
                 .ThenBy(p => p.Name);
 
@@ -133,6 +168,14 @@ namespace CH21Tests
         }
 
         [TestMethod]
+        public void DistinctTest()
+        {
+            var query = "HelloWorld".Distinct();
+            Assert.AreEqual("HeloWrd", new string(query.ToArray()));
+        }
+
+
+        [TestMethod]
         public void DeferredExecution()
         {
             var numbers = new List<int> {1};
@@ -163,7 +206,4 @@ namespace CH21Tests
             return (IEnumerable<T>) query;
         }
     }
-
-
-     
 }
