@@ -170,8 +170,53 @@ namespace CH21Tests
         [TestMethod]
         public void DistinctTest()
         {
-            var query = "HelloWorld".Distinct();
-            Assert.AreEqual("HeloWrd", new string(query.ToArray()));
+            var nums = new[] {1, 1, 1, 1};
+
+            var distinctValue = nums
+                .Distinct()
+                .FirstOrDefault();
+
+            Assert.AreEqual(1, distinctValue);
+        }
+
+        [TestMethod]
+        public void ToDictionaryTest()
+        {
+            var d = _persons.ToDictionary(key => key.Name, value => value.Age);
+
+            Assert.AreEqual(10, d["Tom"]);
+        }
+
+        [TestMethod]
+        public void ToLookupTest()
+        {
+            var lookup = _persons.ToLookup(key => key.Age, value => value.Name);
+            var names = lookup[5].ToArray();
+
+            CollectionAssert.AreEqual(new[] {"Dick", "Harry", "Mary"}, names);
+        }
+
+        // Query syntax expression vs method syntax expression
+        [TestMethod]
+        public void QueryVsMethodSyntaxTest()
+        {
+            // Data source.
+            int[] scores = {90, 71, 82, 93, 75, 82};
+
+            // Query Expression.
+            var q1 =
+                from score in scores
+                where score > 80
+                orderby score descending
+                select score;
+
+            // Method chain.
+            var q2 =
+                scores
+                    .Where(score => score > 80)
+                    .OrderByDescending(score => score);
+
+            CollectionAssert.AreEqual(q1.ToArray(), q2.ToArray());
         }
 
 
