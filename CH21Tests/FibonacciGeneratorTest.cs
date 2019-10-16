@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CH21Tests
 {
-    [TestClass]
     public class FibonacciGeneratorTest
     {
         private readonly List<int> First21Fibs = new List<int>
@@ -38,21 +37,21 @@ namespace CH21Tests
             return nums;
         }
 
-        [TestMethod]
+        [Test]
         public void GetFibNumsTest()
         {
             var fibs = GetFibNums(21);
             CollectionAssert.AreEqual(First21Fibs, fibs);
         }
 
-        [TestMethod]
+        [Test]
         public void FibonacciSortedDictGeneratorTest()
         {
             var gen = FibonacciGenerator.BuildFibonacciGenerator(21, "SortedDictionary");
             CollectionAssert.AreEqual(First21Fibs, gen.Nums);
         }
 
-        [TestMethod]
+        [Test]
         public void FibonacciDictGeneratorTest()
         {
             var gen = FibonacciGenerator.BuildFibonacciGenerator(21, "Dictionary");

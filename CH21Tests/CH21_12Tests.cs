@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CH21Tests
 {
-    [TestClass]
     public class CH21_12Tests
     {
         private const int Max = 10000000;
@@ -24,31 +22,31 @@ namespace CH21Tests
                 .ToArray();
         }
 
-        [TestMethod]
+        [Test]
         public void MaxTest()
         {
             var max = _values.Max();
         }
 
-        [TestMethod]
+        [Test]
         public void AvgTest()
         {
             var avg = _values.Average();
         }
 
-        [TestMethod]
+        [Test]
         public void MaxAsParallelTest()
         {
             var max = _values.AsParallel().Max();
         }
 
-        [TestMethod]
+        [Test]
         public void AvgAsParallelTest()
         {
             var avg = _values.AsParallel().Average();
         }
 
-        [TestMethod]
+        [Test]
         public void PrimeNumbersTest()
         {
             // Calculate prime numbers using a simple (unoptimized) algorithm.

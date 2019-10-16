@@ -26,7 +26,6 @@ namespace CH21Tests
             return generator;
         }
 
-
         public static int FibonacciNumber(int n)
         {
             var a = 0;

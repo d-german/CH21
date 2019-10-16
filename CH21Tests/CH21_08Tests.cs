@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CH21Tests
 {
-    [TestClass]
     public class CH21_08Tests
     {
         public delegate bool NumberPredicate(int number);
 
-       
         private readonly NumberPredicate _evenPredicate = EvenPredicate2;
 
         private static bool EvenPredicate2(int number)
@@ -17,7 +15,7 @@ namespace CH21Tests
             return number % 2 == 0;
         }
 
-        private readonly NumberPredicate _evenPredicate2 = delegate (int number) { return number % 2 == 0; };
+        private readonly NumberPredicate _evenPredicate2 = delegate(int number) { return number % 2 == 0; };
         private readonly NumberPredicate _evenPredicate3 = (int number) => { return number % 2 == 0; };
         private readonly NumberPredicate _evenPredicate4 = number => number % 2 == 0;
         private readonly NumberPredicate _evenPredicate5 = n => n % 2 == 0;
@@ -44,21 +42,21 @@ namespace CH21Tests
             return result;
         }
 
-        [TestMethod]
+        [Test]
         public void EvenNumberTest()
         {
             var evenNumbers = FilterArray(_numbers, _evenPredicate);
             CollectionAssert.AreEqual(new[] {2, 4, 6, 8, 10}, evenNumbers);
         }
 
-        [TestMethod]
+        [Test]
         public void OddNumberTest()
         {
             var oddNumbers = FilterArrayFunc(_numbers, n => n % 2 == 1);
             CollectionAssert.AreEqual(new[] {1, 3, 5, 7, 9}, oddNumbers);
         }
 
-        [TestMethod]
+        [Test]
         public void NumbersOver5Test()
         {
             var oddNumbers = FilterArrayFunc(_numbers, n => n > 5);

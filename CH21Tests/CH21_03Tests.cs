@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace CH21Tests
 {
-    [TestClass]
     public class CH21_03Tests
     {
         private static readonly int _searchValue;
@@ -16,7 +16,7 @@ namespace CH21Tests
         static CH21_03Tests()
         {
             _values = GetRandomArray();
-            _searchValue = _values[new Random().Next(0, Max -1)];
+            _searchValue = _values[new Random().Next(0, Max - 1)];
             _sortedValues = new int[_values.Length];
             Array.Copy(_values, _sortedValues, _values.Length);
             Array.Sort(_sortedValues);
@@ -47,8 +47,7 @@ namespace CH21Tests
             return isFound ? position : -1;
         }
 
-
-//        [TestMethod]
+//        [Test]
 //        public void LinearSearchTest()
 //        {
 //            int[] array = {1, 3, 5, 9, 11};
@@ -57,14 +56,14 @@ namespace CH21Tests
 //            Assert.IsTrue(LinearSearch(array, 6) == -1);
 //        }
 
-        [TestMethod]
+        [Test]
         public void LinearSearchValuesTest()
         {
             int index = LinearSearch(_values, _searchValue);
             Assert.IsTrue(index > -1);
         }
 
-        [TestMethod]
+        [Test]
         public void BinarySearchTest()
         {
             var index = Array.BinarySearch(_sortedValues, _searchValue);

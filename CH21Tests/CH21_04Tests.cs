@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CH21Tests
 {
-    [TestClass]
     public class CH21_04Tests
     {
         private static int HashToIndex<T>(T val, int arraySize)
@@ -20,7 +19,7 @@ namespace CH21Tests
             items[index] = item;
         }
 
-        [TestMethod]
+        [Test]
         public void TestAddUpdateDictTest()
         {
             var d = new Dictionary<string, int>();
@@ -35,7 +34,7 @@ namespace CH21Tests
             Assert.IsTrue(d.ContainsValue(3)); // true (slow operation)
         }
 
-        [TestMethod]
+        [Test]
         public void TestEnumerateDictTest()
         {
             var d = new Dictionary<string, int>
@@ -73,7 +72,7 @@ namespace CH21Tests
             Assert.AreEqual("1223", buf.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void HashToIndexTest()
         {
             var hash = new string[8];
@@ -90,7 +89,11 @@ namespace CH21Tests
             Insert(hash, "K_Eleven");
 
             var items = hash
-                .Select(a => { Console.WriteLine(a??"-"); return a; })
+                .Select(a =>
+                {
+                    Console.WriteLine(a ?? "-");
+                    return a;
+                })
                 .Where(n => !string.IsNullOrEmpty(n))
                 .Select(n => n)
                 .OrderBy(n => n)

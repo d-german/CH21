@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace CH21Tests
 {
-    [TestClass]
     public class CH21_11TestsInClass
     {
         private readonly List<Person> _persons = new List<Person>
@@ -19,8 +19,7 @@ namespace CH21Tests
 
         private readonly List<int> _values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
 
-
-        [TestMethod]
+        [Test]
         public void TestMethod1()
         {
             var sum = _values.Aggregate(0, (x, y) => x + y);

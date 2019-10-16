@@ -1,41 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CH21Tests
 {
-    [TestClass]
     public class CH21_11Tests
     {
-        private readonly List<Person> _persons = new List<Person>
+        private List<Person> _persons;
+
+        private List<int> _values;
+
+        [SetUp]
+        public void Init()
         {
-            new Person {Name = "Tom", Age = 10},
-            new Person {Name = "Dick", Age = 5},
-            new Person {Name = "Harry", Age = 5},
-            new Person {Name = "Mary", Age = 5},
-            new Person {Name = "Jay", Age = 20},
-            new Person {Name = "George", Age = 20}
-        };
+            _persons = new List<Person>
+            {
+                new Person {Name = "Tom", Age = 10},
+                new Person {Name = "Dick", Age = 5},
+                new Person {Name = "Harry", Age = 5},
+                new Person {Name = "Mary", Age = 5},
+                new Person {Name = "Jay", Age = 20},
+                new Person {Name = "George", Age = 20}
+            };
+            
+            _values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
+        }
 
-        private readonly List<int> _values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
-
-
-        [TestMethod]
+        [Test]
         public void AggregateSumValues()
         {
             var sum = _values.Aggregate(0, (x, y) => x + y);
             Assert.AreEqual(55, sum);
         }
 
-        [TestMethod]
+        [Test]
         public void AggregateSumPersonsAges()
         {
             var sum = _persons.Aggregate(0, (x, p) => x + p.Age);
             Assert.AreEqual(65, sum);
         }
 
-        [TestMethod]
+        [Test]
         public void AggregateSumValuesPerson()
         {
             var person = _values.Aggregate(new Person {Age = 0, Name = "Bob"}, (p, n) =>
@@ -46,14 +52,14 @@ namespace CH21Tests
             Assert.AreEqual(55, person.Age);
         }
 
-        [TestMethod]
+        [Test]
         public void AggregateProductValues()
         {
             var product = _values.Aggregate(1, (x, y) => x * y);
             Assert.AreEqual(3628800, product);
         }
 
-        [TestMethod]
+        [Test]
         public void FilterAndOrderEvenValues()
         {
             var evenValueQuery = _values
@@ -63,7 +69,7 @@ namespace CH21Tests
             CollectionAssert.AreEqual(new[] {2, 4, 6, 8, 10}, evenValueQuery.ToArray());
         }
 
-        [TestMethod]
+        [Test]
         public void FirstTest()
         {
             var evenValueQuery = _values
@@ -74,19 +80,19 @@ namespace CH21Tests
             Assert.AreEqual(2, evenValueQuery);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [Test]
         public void FirstFailTest()
         {
-            var value = _values
-                .Where(v => v > 100)
-                .OrderBy(v => v)
-                .First();
-
-            Assert.AreEqual(2, value);
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _ = _values
+                    .Where(v => v > 100)
+                    .OrderBy(v => v)
+                    .First();
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void FirstOrDefaultTest()
         {
             var value = _values
@@ -97,7 +103,7 @@ namespace CH21Tests
             Assert.AreEqual(0, value);
         }
 
-        [TestMethod]
+        [Test]
         public void OddValuesMulBy10AndOrder()
         {
             var query = _values
@@ -108,7 +114,7 @@ namespace CH21Tests
             CollectionAssert.AreEqual(new[] {90, 70, 50, 30, 10}, query.ToArray());
         }
 
-        [TestMethod]
+        [Test]
         public void MapValuesOrderToPersons()
         {
             var query = _values
@@ -121,7 +127,7 @@ namespace CH21Tests
                 query.Display());
         }
 
-        [TestMethod]
+        [Test]
         public void AnonymousTypes()
         {
             const int currentYear = 2018;
@@ -135,7 +141,7 @@ namespace CH21Tests
                 query.Display());
         }
 
-        [TestMethod]
+        [Test]
         public void NamesBiggerThan3LettersTest()
         {
             var query = _persons
@@ -150,7 +156,7 @@ namespace CH21Tests
                 query.Display());
         }
 
-        [TestMethod]
+        [Test]
         public void TakeZipToPersons()
         {
             var query = _values
@@ -167,7 +173,7 @@ namespace CH21Tests
                 query.Display());
         }
 
-        [TestMethod]
+        [Test]
         public void DistinctTest()
         {
             var nums = new[] {1, 1, 1, 1};
@@ -179,7 +185,7 @@ namespace CH21Tests
             Assert.AreEqual(1, distinctValue);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDictionaryTest()
         {
             var d = _persons.ToDictionary(key => key.Name, value => value.Age);
@@ -187,7 +193,7 @@ namespace CH21Tests
             Assert.AreEqual(10, d["Tom"]);
         }
 
-        [TestMethod]
+        [Test]
         public void ToLookupTest()
         {
             var lookup = _persons.ToLookup(key => key.Age, value => value.Name);
@@ -197,7 +203,7 @@ namespace CH21Tests
         }
 
         // Query syntax expression vs method syntax expression
-        [TestMethod]
+        [Test]
         public void QueryVsMethodSyntaxTest()
         {
             // Data source.
@@ -219,8 +225,7 @@ namespace CH21Tests
             CollectionAssert.AreEqual(q1.ToArray(), q2.ToArray());
         }
 
-
-        [TestMethod]
+        [Test]
         public void DeferredExecution()
         {
             var numbers = new List<int> {1};
@@ -232,7 +237,7 @@ namespace CH21Tests
             Assert.AreEqual("10 20", query.Display());
         }
 
-        [TestMethod]
+        [Test]
         public void CapturedVariables()
         {
             Assert.AreEqual("20 40", CapturedEnumerable<int>().Display());
