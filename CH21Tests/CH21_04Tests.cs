@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
@@ -17,6 +18,21 @@ namespace CH21Tests
         {
             var index = HashToIndex(item, items.Count);
             items[index] = item;
+        }
+        private Stopwatch stopWatch;
+        
+        [SetUp]
+        public void Init()
+        {
+            stopWatch = new Stopwatch();
+            stopWatch.Start();
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            stopWatch.Stop();
+            Console.WriteLine(stopWatch.ElapsedMilliseconds);
         }
 
         [Test]

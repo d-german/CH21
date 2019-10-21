@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
-
 
 namespace CH21Tests
 {
@@ -13,6 +13,8 @@ namespace CH21Tests
         private static readonly int[] _values;
         private const int Max = 10000000;
 
+        private Stopwatch stopWatch;
+
         static CH21_03Tests()
         {
             _values = GetRandomArray();
@@ -20,6 +22,20 @@ namespace CH21Tests
             _sortedValues = new int[_values.Length];
             Array.Copy(_values, _sortedValues, _values.Length);
             Array.Sort(_sortedValues);
+        }
+
+        [SetUp]
+        public void Init()
+        {
+            stopWatch = new Stopwatch();
+            stopWatch.Start();
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            stopWatch.Stop();
+            Console.WriteLine(stopWatch.ElapsedMilliseconds);
         }
 
         private static int[] GetRandomArray()
