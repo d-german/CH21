@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using NUnit.Framework;
 
 namespace CH21Tests
 {
     public class FibonacciGeneratorTest
     {
-        private readonly List<int> First21Fibs = new List<int>
+        private readonly List<int> _first21Fibs = new List<int>
         {
             0,
             1,
@@ -30,6 +32,22 @@ namespace CH21Tests
             6765
         };
 
+        private Stopwatch _stopWatch;
+
+
+        [SetUp]
+        public void Init()
+        {
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            _stopWatch.Stop();
+            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
+        }
         private static List<int> GetFibNums(int n)
         {
             var nums = new List<int>();
@@ -41,21 +59,21 @@ namespace CH21Tests
         public void GetFibNumsTest()
         {
             var fibs = GetFibNums(21);
-            CollectionAssert.AreEqual(First21Fibs, fibs);
+            CollectionAssert.AreEqual(_first21Fibs, fibs);
         }
 
         [Test]
         public void FibonacciSortedDictGeneratorTest()
         {
             var gen = FibonacciGenerator.BuildFibonacciGenerator(21, "SortedDictionary");
-            CollectionAssert.AreEqual(First21Fibs, gen.Nums);
+            CollectionAssert.AreEqual(_first21Fibs, gen.Nums);
         }
 
         [Test]
         public void FibonacciDictGeneratorTest()
         {
             var gen = FibonacciGenerator.BuildFibonacciGenerator(21, "Dictionary");
-            CollectionAssert.AreEqual(First21Fibs, gen.Nums);
+            CollectionAssert.AreEqual(_first21Fibs, gen.Nums);
         }
     }
 }

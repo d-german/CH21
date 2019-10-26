@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 
@@ -6,8 +7,24 @@ namespace CH21Tests
 {
     public class CH21_12Tests
     {
-        private const int Max = 10000000;
+        private const int Max = 100000000;
         private static readonly int[] _values;
+        private Stopwatch _stopWatch;
+
+
+        [SetUp]
+        public void Init()
+        {
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            _stopWatch.Stop();
+            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
+        }
 
         static CH21_12Tests()
         {

@@ -7,8 +7,10 @@ using NUnit.Framework;
 
 namespace CH21Tests
 {
+    [TestFixture]
     public class CH21_04Tests
     {
+
         private static int HashToIndex<T>(T val, int arraySize)
         {
             return Math.Abs(val.GetHashCode()) % arraySize;
@@ -19,20 +21,20 @@ namespace CH21Tests
             var index = HashToIndex(item, items.Count);
             items[index] = item;
         }
-        private Stopwatch stopWatch;
+        private Stopwatch _stopWatch;
         
         [SetUp]
         public void Init()
         {
-            stopWatch = new Stopwatch();
-            stopWatch.Start();
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
         }
 
         [TearDown]
         public void Cleanup()
         {
-            stopWatch.Stop();
-            Console.WriteLine(stopWatch.ElapsedMilliseconds);
+            _stopWatch.Stop();
+            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
         }
 
         [Test]

@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace CH21Tests
 {
+    [TestFixture]
     public class CH21_03Tests
     {
         private static readonly int _searchValue;
@@ -13,7 +14,7 @@ namespace CH21Tests
         private static readonly int[] _values;
         private const int Max = 10000000;
 
-        private Stopwatch stopWatch;
+        private Stopwatch _stopWatch;
 
         static CH21_03Tests()
         {
@@ -27,15 +28,15 @@ namespace CH21Tests
         [SetUp]
         public void Init()
         {
-            stopWatch = new Stopwatch();
-            stopWatch.Start();
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
         }
 
         [TearDown]
         public void Cleanup()
         {
-            stopWatch.Stop();
-            Console.WriteLine(stopWatch.ElapsedMilliseconds);
+            _stopWatch.Stop();
+            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
         }
 
         private static int[] GetRandomArray()
