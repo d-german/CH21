@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
 namespace CH21Tests
 {
+    [TestFixture]
     public class CH21_04Tests
     {
+
         private static int HashToIndex<T>(T val, int arraySize)
         {
             return Math.Abs(val.GetHashCode()) % arraySize;
@@ -17,6 +20,21 @@ namespace CH21Tests
         {
             var index = HashToIndex(item, items.Count);
             items[index] = item;
+        }
+        private Stopwatch _stopWatch;
+        
+        [SetUp]
+        public void Init()
+        {
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            _stopWatch.Stop();
+            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
         }
 
         [Test]
