@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CH21Tests
 {
@@ -10,9 +11,7 @@ namespace CH21Tests
         {
         }
 
-        public List<int> Nums { get; private set; }
-
-        public static FibonacciGenerator BuildFibonacciGenerator(int n, string dictType)
+        public static FibonacciGenerator BuildFibonacciGenerator(string dictType)
         {
             var generator = new FibonacciGenerator();
 
@@ -21,43 +20,41 @@ namespace CH21Tests
             else
                 generator._cache = new Dictionary<int, int>();
 
-            generator.BuildFibNums(n);
-
             return generator;
         }
 
-        public static int FibonacciNumber(int n)
+        public int Fib(int n)
         {
-            var a = 0;
-            var b = 1;
+            Console.WriteLine($"n:= {n}");
 
-            for (var i = 0; i < n; i++)
+            if ((n == 1) || (n == 2))
             {
-                var tmp = a;
-                a = b;
-                b += tmp;
+                return 1;
             }
 
-            return a;
+            return Fib(n - 1) + Fib(n - 2);
         }
 
-        private int FibValue(int key)
+        public int FibFromCache(int key)
         {
             if (!_cache.ContainsKey(key))
             {
-                _cache[key] = FibonacciNumber(key);
+                _cache[key] = _fibonacci(key);
             }
 
             return _cache[key];
         }
 
-        private void BuildFibNums(int n)
+        private int _fibonacci(int n)
         {
-            Nums = new List<int>();
-            for (var i = 0; i < n; i++)
+            Console.WriteLine($"n:= {n}");
+
+            if ((n == 1) || (n == 2))
             {
-                Nums.Add(FibValue(i));
+                return 1;
             }
+
+            return FibFromCache(n - 1) + FibFromCache(n - 2);
         }
     }
 }
