@@ -27,7 +27,7 @@ namespace CH21Tests
         {
             Console.WriteLine($"n:= {n}");
 
-            if ((n == 1) || (n == 2))
+            if (n == 1 || (n == 2))
             {
                 return 1;
             }

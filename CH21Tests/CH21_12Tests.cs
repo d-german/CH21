@@ -11,7 +11,6 @@ namespace CH21Tests
         private static readonly int[] _values;
         private Stopwatch _stopWatch;
 
-
         [SetUp]
         public void Init()
         {
@@ -42,25 +41,25 @@ namespace CH21Tests
         [Test]
         public void MaxTest()
         {
-            var max = _values.Max();
+            _ = _values.Max();
         }
 
         [Test]
         public void AvgTest()
         {
-            var avg = _values.Average();
+            _ = _values.Average();
         }
 
         [Test]
         public void MaxAsParallelTest()
         {
-            var max = _values.AsParallel().Max();
+            _ = _values.AsParallel().Max();
         }
 
         [Test]
         public void AvgAsParallelTest()
         {
-            var avg = _values.AsParallel().Average();
+            _ = _values.AsParallel().Average();
         }
 
         [Test]
