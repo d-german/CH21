@@ -8,6 +8,31 @@ namespace CH21Tests
     {
         private Stopwatch _stopWatch;
 
+        // small
+        private const int N = 6;
+        private const ulong Result = 8;
+
+//        private const int N = 20;
+//        private const ulong Result = 6765;
+
+        // medium
+//        private const int N = 40;
+//        private const ulong Result = 102334155;
+
+        // large
+//        private const int N = 45;
+//        private const ulong Result = 1134903170;
+
+//        private const int N = 4000;
+//        private const ulong Result = 483944808890094715;
+
+        // large causes stack overflow
+//        private const int N = 4156;
+//        private const ulong Result = 16574604806748148403;
+
+//        private const int N = 99999;
+//        private const ulong Result = 535601498209671957;
+
         [SetUp]
         public void Init()
         {
@@ -22,46 +47,37 @@ namespace CH21Tests
             Console.WriteLine(_stopWatch.ElapsedMilliseconds);
         }
 
-        [Test]
-        public void SmallSlow()
-        {
-            var gen = FibonacciGenerator.BuildFibonacciGenerator("");
-            var result = gen.Fib(6);
-            Assert.AreEqual(8, result);
-        }
-
-        [Test]
-        public void SmallSorted()
-        {
-            var gen = FibonacciGenerator.BuildFibonacciGenerator("SortedDictionary");
-            var result = gen.FibFromCache(6);
-            Assert.AreEqual(8, result);
-        }
-
         //[Test]
-        public void LargeSlow()
-        {
-            var gen = FibonacciGenerator.BuildFibonacciGenerator("SortedDictionary");
-            var result = gen.Fib(45);
-            Assert.AreEqual(1134903170, result);
-        }
-
-        [Test]
-        public void LargeHash()
+        public void Recursive()
         {
             var gen = FibonacciGenerator.BuildFibonacciGenerator("");
-            var result = gen.FibFromCache(45);
-
-            Assert.AreEqual(1134903170, result);
+            var result = gen.Fib(N);
+            Assert.AreEqual(Result, result);
         }
 
         [Test]
-        public void LargeSorted()
+        public void NonRecursive()
+        {
+            var gen = FibonacciGenerator.BuildFibonacciGenerator("");
+            var result = gen.FibonacciNumber(N);
+            Assert.AreEqual(Result, result);
+        }
+
+        [Test]
+        public void SortedCached()
         {
             var gen = FibonacciGenerator.BuildFibonacciGenerator("SortedDictionary");
-            var result = gen.FibFromCache(45);
+            var result = gen.FibFromCache(N);
+            Assert.AreEqual(Result, result);
+        }
 
-            Assert.AreEqual(1134903170, result);
+        [Test]
+        public void HashCached()
+        {
+            var gen = FibonacciGenerator.BuildFibonacciGenerator("");
+            var result = gen.FibFromCache(N);
+
+            Assert.AreEqual(Result, result);
         }
     }
 }

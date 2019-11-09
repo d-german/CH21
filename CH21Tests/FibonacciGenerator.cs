@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CH21Tests
 {
     public class FibonacciGenerator
     {
-        private IDictionary<int, int> _cache;
+        private IDictionary<ulong, ulong> _cache;
 
         private FibonacciGenerator()
         {
@@ -16,17 +15,17 @@ namespace CH21Tests
             var generator = new FibonacciGenerator();
 
             if (dictType.Equals("SortedDictionary"))
-                generator._cache = new SortedDictionary<int, int>();
+                generator._cache = new SortedDictionary<ulong, ulong>();
             else
-                generator._cache = new Dictionary<int, int>();
+                generator._cache = new Dictionary<ulong, ulong>();
 
             return generator;
         }
 
-        public int Fib(int n)
+        public ulong Fib(ulong n)
         {
-            Console.WriteLine($"n:= {n}");
-
+            Display(n);
+            
             if (n == 1 || (n == 2))
             {
                 return 1;
@@ -35,7 +34,7 @@ namespace CH21Tests
             return Fib(n - 1) + Fib(n - 2);
         }
 
-        public int FibFromCache(int key)
+        public ulong FibFromCache(ulong key)
         {
             if (!_cache.ContainsKey(key))
             {
@@ -45,9 +44,9 @@ namespace CH21Tests
             return _cache[key];
         }
 
-        private int _fibonacci(int n)
+        private ulong _fibonacci(ulong n)
         {
-            Console.WriteLine($"n:= {n}");
+            Display(n);
 
             if ((n == 1) || (n == 2))
             {
@@ -55,6 +54,27 @@ namespace CH21Tests
             }
 
             return FibFromCache(n - 1) + FibFromCache(n - 2);
+        }
+        
+        public ulong FibonacciNumber(ulong n)
+        {
+            ulong a = 0;
+            ulong b = 1;
+
+            for (ulong i = 0; i < n; i++)
+            {
+                Display(a);
+                var tmp = a;
+                a = b;
+                b += tmp;
+            }
+
+            return a;
+        }
+        
+        private static void Display(ulong n)
+        {
+            //Console.WriteLine($"n:= {n}");
         }
     }
 }
