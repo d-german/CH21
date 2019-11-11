@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 
-namespace CH21Tests
+namespace ch21_tests
 {
     public class FibonacciGenerator
     {
-        private IDictionary<ulong, ulong> _cache;
+        private IDictionary<BigInteger, BigInteger> _cache;
 
         private FibonacciGenerator()
         {
@@ -15,14 +16,14 @@ namespace CH21Tests
             var generator = new FibonacciGenerator();
 
             if (dictType.Equals("SortedDictionary"))
-                generator._cache = new SortedDictionary<ulong, ulong>();
+                generator._cache = new SortedDictionary<BigInteger, BigInteger>();
             else
-                generator._cache = new Dictionary<ulong, ulong>();
+                generator._cache = new Dictionary<BigInteger, BigInteger>();
 
             return generator;
         }
 
-        public ulong Fib(ulong n)
+        public BigInteger Fib(BigInteger n)
         {
             Display(n);
             
@@ -34,7 +35,7 @@ namespace CH21Tests
             return Fib(n - 1) + Fib(n - 2);
         }
 
-        public ulong FibFromCache(ulong key)
+        public BigInteger FibFromCache(BigInteger key)
         {
             if (!_cache.ContainsKey(key))
             {
@@ -44,7 +45,7 @@ namespace CH21Tests
             return _cache[key];
         }
 
-        private ulong _fibonacci(ulong n)
+        private BigInteger _fibonacci(BigInteger n)
         {
             Display(n);
 
@@ -56,12 +57,12 @@ namespace CH21Tests
             return FibFromCache(n - 1) + FibFromCache(n - 2);
         }
         
-        public ulong FibonacciNumber(ulong n)
+        public BigInteger FibonacciNumber(BigInteger n)
         {
-            ulong a = 0;
-            ulong b = 1;
+            BigInteger a = 0;
+            BigInteger b = 1;
 
-            for (ulong i = 0; i < n; i++)
+            for (BigInteger i = 0; i < n; i++)
             {
                 Display(a);
                 var tmp = a;
@@ -72,7 +73,7 @@ namespace CH21Tests
             return a;
         }
         
-        private static void Display(ulong n)
+        private static void Display(BigInteger n)
         {
             //Console.WriteLine($"n:= {n}");
         }
