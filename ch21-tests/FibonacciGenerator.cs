@@ -39,7 +39,7 @@ namespace ch21_tests
         }
 
         public static int Fib(int n)
-        {
+        { Display(n);
             if (n == 1 || (n == 2))
             {
                 return 1;
@@ -59,10 +59,8 @@ namespace ch21_tests
         }
 
         private BigInteger Fibonacci(int n)
-        {
-           
-
-            if ((n == 1) || (n == 2))
+        { Display(n);
+            if (n == 1 || n == 2)
             {
                 return 1;
             }
@@ -75,8 +73,8 @@ namespace ch21_tests
             BigInteger a = 0;
             BigInteger b = 1;
 
-            for (BigInteger i = 0; i < n; i++)
-            {
+            for (var i = 1; i <= n; i++)
+            { Display(i);
                 var tmp = a;
                 a = b;
                 b += tmp;
@@ -85,7 +83,7 @@ namespace ch21_tests
             return a;
         }
         
-        private static void Display(BigInteger n)
+        private static void Display(int n)
         {
             Console.WriteLine($"n:= {n}");
         }
