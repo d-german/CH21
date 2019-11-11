@@ -1,32 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace ch21_tests
 {
+    public enum Type
+    {
+        Sorted,
+        Hash,
+        ConcurrentHash
+        
+    }
     public class FibonacciGenerator
     {
-        private IDictionary<BigInteger, BigInteger> _cache;
+        private IDictionary<int, BigInteger> _cache;
 
-        private FibonacciGenerator()
-        {
-        }
-
-        public static FibonacciGenerator BuildFibonacciGenerator(string dictType)
+        private FibonacciGenerator(){}
+        
+        public static FibonacciGenerator BuildGenerator(Type dictType)
         {
             var generator = new FibonacciGenerator();
 
-            if (dictType.Equals("SortedDictionary"))
-                generator._cache = new SortedDictionary<BigInteger, BigInteger>();
-            else
-                generator._cache = new Dictionary<BigInteger, BigInteger>();
+            switch (dictType)
+            {
+                case Type.Sorted:
+                    generator._cache = new SortedDictionary<int, BigInteger>();
+                    break;
+                case Type.Hash:
+                    generator._cache = new Dictionary<int, BigInteger>();
+                    break;
+                case Type.ConcurrentHash:
+                    generator._cache = new ConcurrentDictionary<int, BigInteger>();
+                    break;
+            }
 
             return generator;
         }
 
-        public BigInteger Fib(BigInteger n)
+        public static int Fib(int n)
         {
-            Display(n);
-            
             if (n == 1 || (n == 2))
             {
                 return 1;
@@ -35,19 +48,19 @@ namespace ch21_tests
             return Fib(n - 1) + Fib(n - 2);
         }
 
-        public BigInteger FibFromCache(BigInteger key)
+        public BigInteger FibFromCache(int key)
         {
             if (!_cache.ContainsKey(key))
             {
-                _cache[key] = _fibonacci(key);
+                _cache[key] = Fibonacci(key);
             }
 
             return _cache[key];
         }
 
-        private BigInteger _fibonacci(BigInteger n)
+        private BigInteger Fibonacci(int n)
         {
-            Display(n);
+           
 
             if ((n == 1) || (n == 2))
             {
@@ -57,14 +70,13 @@ namespace ch21_tests
             return FibFromCache(n - 1) + FibFromCache(n - 2);
         }
         
-        public BigInteger FibonacciNumber(BigInteger n)
+        public static BigInteger FibonacciNumber(int n)
         {
             BigInteger a = 0;
             BigInteger b = 1;
 
             for (BigInteger i = 0; i < n; i++)
             {
-                Display(a);
                 var tmp = a;
                 a = b;
                 b += tmp;
@@ -75,7 +87,7 @@ namespace ch21_tests
         
         private static void Display(BigInteger n)
         {
-            //Console.WriteLine($"n:= {n}");
+            Console.WriteLine($"n:= {n}");
         }
     }
 }
