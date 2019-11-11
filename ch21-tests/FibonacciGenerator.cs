@@ -10,14 +10,16 @@ namespace ch21_tests
         Sorted,
         Hash,
         ConcurrentHash
-        
     }
+
     public class FibonacciGenerator
     {
         private IDictionary<int, BigInteger> _cache;
 
-        private FibonacciGenerator(){}
-        
+        private FibonacciGenerator()
+        {
+        }
+
         public static FibonacciGenerator BuildGenerator(Type dictType)
         {
             var generator = new FibonacciGenerator();
@@ -39,8 +41,8 @@ namespace ch21_tests
         }
 
         public static int Fib(int n)
-        { Display(n);
-            if (n == 1 || (n == 2))
+        {
+            if (n == 1 || n == 2)
             {
                 return 1;
             }
@@ -59,7 +61,8 @@ namespace ch21_tests
         }
 
         private BigInteger Fibonacci(int n)
-        { Display(n);
+        {
+            Display(n);
             if (n == 1 || n == 2)
             {
                 return 1;
@@ -67,14 +70,15 @@ namespace ch21_tests
 
             return FibFromCache(n - 1) + FibFromCache(n - 2);
         }
-        
+
         public static BigInteger FibonacciNumber(int n)
         {
             BigInteger a = 0;
             BigInteger b = 1;
 
             for (var i = 1; i <= n; i++)
-            { Display(i);
+            {
+                Display(i);
                 var tmp = a;
                 a = b;
                 b += tmp;
@@ -82,7 +86,7 @@ namespace ch21_tests
 
             return a;
         }
-        
+
         private static void Display(int n)
         {
             Console.WriteLine($"n:= {n}");
