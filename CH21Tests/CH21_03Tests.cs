@@ -8,21 +8,29 @@ namespace CH21Tests
     [TestFixture]
     public class CH21_03Tests
     {
-        private static readonly int _searchValue;
-        private static readonly int[] _sortedValues;
+        private static readonly int SearchValue;
+        private static readonly int[] SortedValues;
 
-        private static readonly int[] _values;
-        private const int Max = 10000000;
+        private static readonly int[] Values;
+        private const int Max = 10_000_000;
 
         private Stopwatch _stopWatch;
 
+        private static int[] GetRandomArray()
+        {
+            var random = new Random();
+            return Enumerable.Range(1, Max)
+                .Select(x => random.Next(1, Max))
+                .ToArray();
+        }
+
         static CH21_03Tests()
         {
-            _values = GetRandomArray();
-            _searchValue = _values[new Random().Next(0, Max - 1)];
-            _sortedValues = new int[_values.Length];
-            Array.Copy(_values, _sortedValues, _values.Length);
-            Array.Sort(_sortedValues);
+            Values = GetRandomArray();
+            SearchValue = Values[new Random().Next(0, Max - 1)];
+            SortedValues = new int[Values.Length];
+            Array.Copy(Values, SortedValues, Values.Length);
+            Array.Sort(SortedValues);
         }
 
         [SetUp]
@@ -37,14 +45,6 @@ namespace CH21Tests
         {
             _stopWatch.Stop();
             Console.WriteLine(_stopWatch.ElapsedMilliseconds);
-        }
-
-        private static int[] GetRandomArray()
-        {
-            var random = new Random();
-            return Enumerable.Range(1, Max)
-                .Select(x => random.Next(1, Max))
-                .ToArray();
         }
 
         private static int LinearSearch(int[] array, int value)
@@ -76,14 +76,14 @@ namespace CH21Tests
         [Test]
         public void LinearSearchValuesTest()
         {
-            int index = LinearSearch(_values, _searchValue);
+            var index = LinearSearch(Values, SearchValue);
             Assert.IsTrue(index > -1);
         }
 
         [Test]
         public void BinarySearchTest()
         {
-            var index = Array.BinarySearch(_sortedValues, _searchValue);
+            var index = Array.BinarySearch(SortedValues, SearchValue);
             Assert.IsTrue(index > -1);
         }
     }

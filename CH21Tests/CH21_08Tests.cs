@@ -6,7 +6,7 @@ namespace CH21Tests
 {
     public class CH21_08Tests
     {
-        public delegate bool NumberPredicate(int number);
+        private delegate bool NumberPredicate(int number);
 
         private readonly NumberPredicate _evenPredicate = EvenPredicate2;
 
@@ -22,7 +22,7 @@ namespace CH21Tests
 
         private readonly int[] _numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-        private List<int> FilterArray(IEnumerable<int> array, NumberPredicate predicate)
+        private static IEnumerable<int> FilterArray(IEnumerable<int> array, NumberPredicate predicate)
         {
             var result = new List<int>();
             foreach (var num in array)
@@ -32,7 +32,7 @@ namespace CH21Tests
             return result;
         }
 
-        private List<int> FilterArrayFunc(IEnumerable<int> array, Func<int, bool> predicate)
+        private static IEnumerable<int> FilterArrayFunc(IEnumerable<int> array, Func<int, bool> predicate)
         {
             var result = new List<int>();
             foreach (var num in array)

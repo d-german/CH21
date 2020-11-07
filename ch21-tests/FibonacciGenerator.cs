@@ -16,10 +16,6 @@ namespace ch21_tests
     {
         private IDictionary<int, BigInteger> _cache;
 
-        private FibonacciGenerator()
-        {
-        }
-
         public static FibonacciGenerator BuildGenerator(Type dictType)
         {
             var generator = new FibonacciGenerator();

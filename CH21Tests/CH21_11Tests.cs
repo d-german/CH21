@@ -243,7 +243,7 @@ namespace CH21Tests
             Assert.AreEqual("20 40", CapturedEnumerable<int>().Display());
         }
 
-        internal static IEnumerable<T> CapturedEnumerable<T>()
+        private static IEnumerable<T> CapturedEnumerable<T>()
         {
             int[] numbers = {1, 2};
 

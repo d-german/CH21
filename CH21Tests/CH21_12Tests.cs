@@ -8,7 +8,7 @@ namespace CH21Tests
     public class CH21_12Tests
     {
         private const int Max = 100000000;
-        private static readonly int[] _values;
+        private static readonly int[] Values;
         private Stopwatch _stopWatch;
 
         [SetUp]
@@ -27,7 +27,7 @@ namespace CH21Tests
 
         static CH21_12Tests()
         {
-            _values = GetRandomArray();
+            Values = GetRandomArray();
         }
 
         private static int[] GetRandomArray()
@@ -41,25 +41,25 @@ namespace CH21Tests
         [Test]
         public void MaxTest()
         {
-            _ = _values.Max();
+            _ = Values.Max();
         }
 
         [Test]
         public void AvgTest()
         {
-            _ = _values.Average();
+            _ = Values.Average();
         }
 
         [Test]
         public void MaxAsParallelTest()
         {
-            _ = _values.AsParallel().Max();
+            _ = Values.AsParallel().Max();
         }
 
         [Test]
         public void AvgAsParallelTest()
         {
-            _ = _values.AsParallel().Average();
+            _ = Values.AsParallel().Average();
         }
 
         [Test]

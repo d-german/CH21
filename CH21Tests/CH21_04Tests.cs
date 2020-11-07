@@ -7,22 +7,26 @@ using NUnit.Framework;
 
 namespace CH21Tests
 {
+    public static class Helpers
+    {
+        private static int HashToIndex<T>(T val, int arraySize)
+        {
+            var index = Math.Abs(val.GetHashCode()) % arraySize;
+            Console.WriteLine($"Inserting {val} at position {index}");
+            return index;
+        }
+
+        public static void Insert<T>(this IList<T> items, T item)
+        {
+            items[HashToIndex(item, items.Count)] = item;
+        }
+    }
+
     [TestFixture]
     public class CH21_04Tests
     {
-
-        private static int HashToIndex<T>(T val, int arraySize)
-        {
-            return Math.Abs(val.GetHashCode()) % arraySize;
-        }
-
-        private static void Insert<T>(IList<T> items, T item)
-        {
-            var index = HashToIndex(item, items.Count);
-            items[index] = item;
-        }
         private Stopwatch _stopWatch;
-        
+
         [SetUp]
         public void Init()
         {
@@ -94,23 +98,23 @@ namespace CH21Tests
         public void HashToIndexTest()
         {
             var hash = new string[8];
-            Insert(hash, "A_One");
-            Insert(hash, "B_Two");
-            Insert(hash, "C_Three");
-            Insert(hash, "D_Four");
-            Insert(hash, "E_Five");
-            Insert(hash, "F_Six");
-            Insert(hash, "G_Seven");
-            Insert(hash, "H_Eight");
-            Insert(hash, "I_Nine");
-            Insert(hash, "J_Ten");
-            Insert(hash, "K_Eleven");
+            hash.Insert("A_One");
+            hash.Insert("B_Two");
+            hash.Insert("C_Three");
+            hash.Insert("D_Four");
+            hash.Insert("E_Five");
+            hash.Insert("F_Six");
+            hash.Insert("G_Seven");
+            hash.Insert("H_Eight");
+            hash.Insert("I_Nine");
+            hash.Insert("J_Ten");
+            hash.Insert("K_Eleven");
 
-            var items = hash
-                .Select(a =>
+            _ = hash
+                .Select(value =>
                 {
-                    Console.WriteLine(a ?? "-");
-                    return a;
+                    Console.WriteLine(value ?? "-");
+                    return value;
                 })
                 .Where(n => !string.IsNullOrEmpty(n))
                 .Select(n => n)
