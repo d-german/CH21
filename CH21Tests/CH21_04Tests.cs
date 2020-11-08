@@ -13,16 +13,16 @@ namespace CH21Tests
         [Test]
         public void TestAddUpdateDictTest()
         {
-            var d = new Dictionary<string, int>();
+            var dictionary = new Dictionary<string, int>();
 
-            d.Add("One", 1);
-            d["Two"] = 2; // adds to dictionary because "two" not already present
-            d["Two"] = 22; // updates dictionary because "two" is now present
-            d["Three"] = 3;
+            dictionary.Add("One", 1);
+            dictionary["Two"] = 2; // adds to dictionary because "two" not already present
+            dictionary["Two"] = 22; // updates dictionary because "two" is now present
+            dictionary["Three"] = 3;
 
-            Assert.AreEqual(22, d["Two"]);
-            Assert.IsTrue(d.ContainsKey("One")); // true (fast operation)
-            Assert.IsTrue(d.ContainsValue(3)); // true (slow operation)
+            Assert.AreEqual(22, dictionary["Two"]);
+            Assert.IsTrue(dictionary.ContainsKey("One")); // true (fast operation)
+            Assert.IsTrue(dictionary.ContainsValue(3)); // true (slow operation)
         }
 
         [Test]
@@ -80,6 +80,7 @@ namespace CH21Tests
             hash.Insert("K_Eleven");
 
             _ = hash
+                .OrderBy(i => i)
                 .Select(value =>
                 {
                     Console.WriteLine(value ?? "-");
