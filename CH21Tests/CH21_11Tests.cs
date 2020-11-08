@@ -23,7 +23,7 @@ namespace CH21Tests
                 new Person {Name = "Jay", Age = 20},
                 new Person {Name = "George", Age = 20}
             };
-            
+
             _values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
         }
 
@@ -140,6 +140,8 @@ namespace CH21Tests
                 "{ Name = George, BirthYear = 1998 } { Name = Jay, BirthYear = 1998 } { Name = Tom, BirthYear = 2008 } { Name = Dick, BirthYear = 2013 } { Name = Harry, BirthYear = 2013 } { Name = Mary, BirthYear = 2013 }",
                 query.Display());
         }
+
+// // // // // // // // // // // stop here // // // // // //
 
         [Test]
         public void NamesBiggerThan3LettersTest()
