@@ -7,40 +7,9 @@ using NUnit.Framework;
 
 namespace CH21Tests
 {
-    public static class Helpers
-    {
-        private static int HashToIndex<T>(T val, int arraySize)
-        {
-            var index = Math.Abs(val.GetHashCode()) % arraySize;
-            Console.WriteLine($"Inserting {val} at position {index}");
-            return index;
-        }
-
-        public static void Insert<T>(this IList<T> items, T item)
-        {
-            items[HashToIndex(item, items.Count)] = item;
-        }
-    }
-
     [TestFixture]
     public class CH21_04Tests
     {
-        private Stopwatch _stopWatch;
-
-        [SetUp]
-        public void Init()
-        {
-            _stopWatch = new Stopwatch();
-            _stopWatch.Start();
-        }
-
-        [TearDown]
-        public void Cleanup()
-        {
-            _stopWatch.Stop();
-            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
-        }
-
         [Test]
         public void TestAddUpdateDictTest()
         {
@@ -59,7 +28,7 @@ namespace CH21Tests
         [Test]
         public void TestEnumerateDictTest()
         {
-            var d = new Dictionary<string, int>
+            var dictionary = new Dictionary<string, int>
             {
                 {"One", 1},
                 {"Two", 2},
@@ -67,10 +36,10 @@ namespace CH21Tests
                 {"Three", 3}
             };
 
-            d["Two"] = 22; // updates dictionary because "two" is now present
+            dictionary["Two"] = 22; // updates dictionary because "two" is now present
 
             var buf = new StringBuilder();
-            foreach (var kv in d)
+            foreach (var kv in dictionary)
             {
                 buf.Append($"{kv.Key}; {kv.Value} ");
             }
@@ -78,17 +47,17 @@ namespace CH21Tests
             Assert.AreEqual("One; 1 Two; 22 Three; 3 ", buf.ToString());
 
             buf.Clear();
-            foreach (var s in d.Keys)
+            foreach (var str in dictionary.Keys)
             {
-                buf.Append(s);
+                buf.Append(str);
             }
 
             Assert.AreEqual("OneTwoThree", buf.ToString());
 
             buf.Clear();
-            foreach (var v in d.Values)
+            foreach (var value in dictionary.Values)
             {
-                buf.Append(v);
+                buf.Append(value);
             }
 
             Assert.AreEqual("1223", buf.ToString());
