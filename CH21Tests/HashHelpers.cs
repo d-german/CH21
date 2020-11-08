@@ -5,16 +5,17 @@ namespace CH21Tests
 {
     public static class HashHelpers
     {
-        private static int HashToIndex<T>(T val, int arraySize)
-        {
-            var index = Math.Abs(val.GetHashCode()) % arraySize;
-            Console.WriteLine($"Inserting {val} at position {index}");
-            return index;
-        }
-
+        /// <summary>
+        /// Inserts using custom hash function
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="item"></param>
+        /// <typeparam name="T"></typeparam>
         public static void Insert<T>(this IList<T> items, T item)
         {
-            items[HashToIndex(item, items.Count)] = item;
+            var index = Math.Abs(item.GetHashCode()) % items.Count;
+            Console.WriteLine($"Inserting {item} at position {index}");
+            items[index] = item;
         }
     }
 }
