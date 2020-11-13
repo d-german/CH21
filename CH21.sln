@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqExample", "LinqExample\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateDriver", "DelegateDriver\DelegateDriver.csproj", "{04750BB7-A12C-4A02-AAD9-AADFBF789CDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyExample", "LazyExample\LazyExample.csproj", "{7ACE97E9-9712-45D1-9F65-093E591CCA12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{04750BB7-A12C-4A02-AAD9-AADFBF789CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04750BB7-A12C-4A02-AAD9-AADFBF789CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04750BB7-A12C-4A02-AAD9-AADFBF789CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ACE97E9-9712-45D1-9F65-093E591CCA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ACE97E9-9712-45D1-9F65-093E591CCA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ACE97E9-9712-45D1-9F65-093E591CCA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ACE97E9-9712-45D1-9F65-093E591CCA12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
