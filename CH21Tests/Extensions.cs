@@ -11,6 +11,22 @@ namespace CH21Tests
             return string.Join(" ", data);
         }
 
+        public static IEnumerable<int> GetInts()
+        {
+            Console.WriteLine(5);
+            yield return 5;
+            Console.WriteLine(4);
+            yield return 4;
+            Console.WriteLine(3);
+            yield return 3;
+            Console.WriteLine(2);
+            yield return 2;
+            Console.WriteLine(1);
+            yield return 1;
+            Console.WriteLine(0);
+            yield return 0;
+        }
+
         public static IEnumerable<int> GetRangeEager(int begin, int end)
         {
             var items = new List<int>();

@@ -298,6 +298,17 @@ namespace CH21Tests
         }
 
         [Test]
+        public void GetInts()
+        {
+            var ints = Extensions.GetInts();
+
+            foreach (var value in ints)
+            {
+                Console.WriteLine($"---{value}---");
+            }
+        }
+
+        [Test]
         public void EagerExecution()
         {
             var results = GetRangeEager(0, 500).FilterEager(i => i < 25).Take(4);
@@ -310,6 +321,5 @@ namespace CH21Tests
             var results = GetRangeLazy(0, 500).FilterLazy(i => i < 25).Take(4);
             Assert.AreEqual("0 1 2 3", results.Display());
         }
-
     }
 }
