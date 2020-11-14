@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using NUnit.Framework;
 using static CH21Tests.Extensions;
@@ -41,9 +42,33 @@ namespace CH21Tests
         }
 
         [Test]
+        [SuppressMessage("ReSharper", "ForCanBeConvertedToForeach")]
+        [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+        public void ImperativeSumValues()
+        {
+            var sum = 0;
+
+            for (var counter = 0; counter < _values.Count; counter++)
+            {
+                sum += _values[counter];
+            }
+
+            Assert.AreEqual(55, sum);
+        }
+
+        [Test]
+        public void DeclarativeSumValues()
+        {
+            var sum = _values.Sum();
+
+            Assert.AreEqual(55, sum);
+        }
+
+        [Test]
         public void AggregateSumValues()
         {
-            var sum = _values.Aggregate(0, (x, y) => x + y);
+            var sum = _values.Aggregate(0, (result, item) => result + item);
+
             Assert.AreEqual(55, sum);
         }
 

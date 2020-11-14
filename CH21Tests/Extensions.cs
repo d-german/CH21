@@ -33,9 +33,9 @@ namespace CH21Tests
             }
         }
 
-        public static IEnumerable<int> FilterEager(this IEnumerable<int> items, Func<int, bool> predicate)
+        public static IEnumerable<T> FilterEager<T>(this IEnumerable<T> items, Func<T, bool> predicate)
         {
-            var results = new List<int>();
+            var results = new List<T>();
 
             foreach (var item in items)
             {
@@ -48,7 +48,7 @@ namespace CH21Tests
             return results;
         }
 
-        public static IEnumerable<int> FilterLazy(this IEnumerable<int> items, Func<int, bool> predicate)
+        public static IEnumerable<T> FilterLazy<T>(this IEnumerable<T> items, Func<T, bool> predicate)
         {
             foreach (var item in items)
             {
