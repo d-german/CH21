@@ -278,6 +278,7 @@ namespace CH21Tests
 
             var factor = 10;
 
+            // ReSharper disable once AccessToModifiedClosure
             var query = numbers.Select(n => n * factor);
 
             factor = 20;
