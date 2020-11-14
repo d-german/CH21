@@ -283,6 +283,20 @@ namespace CH21Tests
             Assert.AreEqual("20 40", CapturedEnumerable<int>().Display());
         }
 
+        private static IEnumerable<T> CapturedEnumerable<T>()
+        {
+            int[] numbers = {1, 2};
+
+            var factor = 10;
+
+            // ReSharper disable once AccessToModifiedClosure
+            var query = numbers.Select(n => n * factor);
+
+            factor = 20;
+
+            return (IEnumerable<T>) query;
+        }
+
         [Test]
         public void EagerExecution()
         {
@@ -297,18 +311,5 @@ namespace CH21Tests
             Assert.AreEqual("0 1 2 3", results.Display());
         }
 
-        private static IEnumerable<T> CapturedEnumerable<T>()
-        {
-            int[] numbers = {1, 2};
-
-            var factor = 10;
-
-            // ReSharper disable once AccessToModifiedClosure
-            var query = numbers.Select(n => n * factor);
-
-            factor = 20;
-
-            return (IEnumerable<T>) query;
-        }
     }
 }
