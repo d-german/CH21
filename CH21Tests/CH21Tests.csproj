@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CH21_03Tests.cs" />
     <Compile Include="CH21_11Tests.cs" />
+    <Compile Include="EagerLazyTests.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HashHelpers.cs" />
     <Compile Include="Person.cs" />

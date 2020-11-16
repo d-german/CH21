@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using NUnit.Framework;
-using static CH21Tests.Extensions;
 
 namespace CH21Tests
 {
@@ -13,7 +12,6 @@ namespace CH21Tests
         private List<Person> _persons;
 
         private List<int> _values;
-        private Stopwatch _stopWatch;
 
         [SetUp]
         public void Init()
@@ -29,16 +27,6 @@ namespace CH21Tests
             };
 
             _values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
-
-            _stopWatch = new Stopwatch();
-            _stopWatch.Start();
-        }
-
-        [TearDown]
-        public void Cleanup()
-        {
-            _stopWatch.Stop();
-            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
         }
 
         [Test]
@@ -260,7 +248,8 @@ namespace CH21Tests
             var q2 =
                 scores
                     .Where(score => score > 80)
-                    .OrderByDescending(score => score);
+                    .OrderByDescending(score => score)
+                    .Select(score => score);
 
             CollectionAssert.AreEqual(q1.ToArray(), q2.ToArray());
         }
@@ -295,31 +284,6 @@ namespace CH21Tests
             factor = 20;
 
             return (IEnumerable<T>) query;
-        }
-
-        [Test]
-        public void GetInts()
-        {
-            var ints = Extensions.GetInts();
-
-            foreach (var value in ints)
-            {
-                Console.WriteLine($"---{value}---");
-            }
-        }
-
-        [Test]
-        public void EagerExecution()
-        {
-            var results = GetRangeEager(0, 500).FilterEager(i => i < 25).Take(4);
-            Assert.AreEqual("0 1 2 3", results.Display());
-        }
-
-        [Test]
-        public void LazyExecution()
-        {
-            var results = GetRangeLazy(0, 500).FilterLazy(i => i < 25).Take(4);
-            Assert.AreEqual("0 1 2 3", results.Display());
         }
     }
 }
