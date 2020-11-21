@@ -14,8 +14,16 @@ public class Program
 
     private static int GetValue(int key)
     {
-        //implement
-        throw new NotImplementedException();
+        if(Cache.ContainsKey(key))
+        {
+            ++Cache[key];
+        }
+        else
+        {
+            Cache.Add(key, 1);
+        }
+
+        return key;
     }
 
     private static void Main(string[] args)

@@ -71,7 +71,7 @@ namespace CH21Tests
             var numbers = Enumerable.Range(3, 1000000 - 3);
 
             var parallelQuery = numbers
-                .AsParallel()
+                //.AsParallel()
                 .Where(n => Enumerable.Range(2, (int) Math.Sqrt(n)).All(i => n % i > 0))
                 .OrderBy(p => p);
 

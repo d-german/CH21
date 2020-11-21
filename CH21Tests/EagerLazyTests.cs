@@ -22,7 +22,7 @@ namespace CH21Tests
         public void Cleanup()
         {
             _stopWatch.Stop();
-            Console.WriteLine(_stopWatch.ElapsedMilliseconds);
+            Console.WriteLine($"{_stopWatch.ElapsedMilliseconds} ms");
         }
 
         [Test]
