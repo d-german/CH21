@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CH21Tests
 {
@@ -9,22 +10,6 @@ namespace CH21Tests
         public static string Display<T>(this IEnumerable<T> data)
         {
             return string.Join(" ", data);
-        }
-
-        public static IEnumerable<int> GetInts()
-        {
-            Console.WriteLine(5);
-            yield return 5;
-            Console.WriteLine(4);
-            yield return 4;
-            Console.WriteLine(3);
-            yield return 3;
-            Console.WriteLine(2);
-            yield return 2;
-            Console.WriteLine(1);
-            yield return 1;
-            Console.WriteLine(0);
-            yield return 0;
         }
 
         public static IEnumerable<int> GetRangeEager(int begin, int end)
@@ -72,6 +57,31 @@ namespace CH21Tests
 
                 Console.WriteLine($"{nameof(FilterLazy)} {item}");
                 yield return item;
+            }
+        }
+
+        public static IEnumerable<T> TakeEager<T>(this IEnumerable<T> items, int count)
+        {
+            var results = new List<T>();
+            var index = 0;
+            foreach (var item in items)
+            {
+                Console.WriteLine($"{nameof(TakeEager)} {item}");
+                results.Add(item);
+                if (++index == count) break;
+            }
+
+            return results;
+        }
+
+        public static IEnumerable<T> TakeLazy<T>(this IEnumerable<T> items, int count)
+        {
+            var index = 0;
+            foreach (var item in items)
+            {
+                Console.WriteLine($"{nameof(TakeLazy)} {item}");
+                yield return item;
+                if (++index == count) yield break;
             }
         }
     }
