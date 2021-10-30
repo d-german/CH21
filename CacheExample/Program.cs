@@ -12,26 +12,19 @@ public class Program
         return value * 50;
     }
 
-    private static int GetValue(int key)
+    private static int GetFromCache(int item)
     {
-        if(Cache.ContainsKey(key))
-        {
-            ++Cache[key];
-        }
-        else
-        {
-            Cache.Add(key, 1);
-        }
-
-        return key;
+        // Instead of performing the ExpensiveCalculation each time, use Cache with item for the key
+        // and the ExpensiveCalculation(item) for the value.
+        return ExpensiveCalculation(item);
     }
 
     private static void Main(string[] args)
     {
         Console.WriteLine("....");
-        Console.WriteLine(GetValue(5));
-        Console.WriteLine(GetValue(10));
-        Console.WriteLine(GetValue(5));
-        Console.WriteLine(GetValue(10));
+        Console.WriteLine(GetFromCache(5));
+        Console.WriteLine(GetFromCache(10));
+        Console.WriteLine(GetFromCache(5));
+        Console.WriteLine(GetFromCache(10));
     }
 }
