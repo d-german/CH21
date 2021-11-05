@@ -67,14 +67,14 @@ namespace CH21Tests
         public void EagerExecution()
         {
             var results = GetRangeEager(0, 500).FilterEager(i => i < 25).TakeEager(4);
-            Assert.AreEqual("0 1 2 3", results.Display());
+            Assert.AreEqual("0 1 2 3", results.Dump());
         }
 
         [Test]
         public void LazyExecution()
         {
             var results = GetRangeLazy(0, 500).FilterLazy(i => i < 25).TakeLazy(4);
-            Assert.AreEqual("0 1 2 3", results.Display());
+            Assert.AreEqual("0 1 2 3", results.Dump());
         }
     }
 }

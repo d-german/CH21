@@ -7,9 +7,31 @@ namespace CH21Tests
     internal static class Extensions
     {
         // extension method that displays all elements separated by spaces
-        public static string Display<T>(this IEnumerable<T> data)
+        public static string Dump<T>(this IEnumerable<T> data)
         {
             return string.Join(" ", data);
+        }
+
+        public static IEnumerable<T> Display<T>(this IEnumerable<T> data, Func<T, T> func = null)
+        {
+            func ??= i => i;
+            Console.WriteLine("=====Start=====");
+            foreach (var item in data)
+            {
+                Console.WriteLine(func(item));
+            }
+
+            Console.WriteLine("=====Stop=====");
+            return data;
+        }
+
+        public static T DisplayItem<T>(this T item, Func<T, T> func = null)
+        {
+            func ??= i => i;
+            Console.WriteLine("=====Start=====");
+            Console.WriteLine(func(item));
+            Console.WriteLine("=====Stop=====");
+            return item;
         }
 
         public static IEnumerable<int> GetRangeEager(int begin, int end)

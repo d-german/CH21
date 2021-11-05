@@ -29,10 +29,10 @@ namespace CH21Tests
         {
             var dictionary = new Dictionary<string, int>
             {
-                {"One", 1},
-                {"Two", 2},
+                { "One", 1 },
+                { "Two", 2 },
                 //{"Two", 22 },
-                {"Three", 3}
+                { "Three", 3 }
             };
 
             dictionary["Two"] = 22; // updates dictionary because "two" is now present
@@ -79,16 +79,14 @@ namespace CH21Tests
             hash.Insert("K_Eleven");
 
             _ = hash
-                .OrderBy(i => i)
-                .Select(value =>
-                {
-                    Console.WriteLine(value ?? "-");
-                    return value;
-                })
+                .Display(i => i ?? "-")
                 .Where(n => !string.IsNullOrEmpty(n))
-                .Select(n => n)
                 .OrderBy(n => n)
-                .ToList();
+                .Display();
+
+            var item = hash.Retrieve("B_Two");
+
+            item.DisplayItem();
         }
     }
 }
