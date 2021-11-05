@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using static CH21Tests.MediaTypeToFileName;
+
+// ReSharper disable UseObjectOrCollectionInitializer
 
 namespace CH21Tests
 {
@@ -37,9 +40,9 @@ namespace CH21Tests
             dictionary["Two"] = 22; // updates dictionary because "two" is now present
 
             var buf = new StringBuilder();
-            foreach (var kv in dictionary)
+            foreach (var (key, value) in dictionary) // tuple deconstruction
             {
-                buf.Append($"{kv.Key}; {kv.Value} ");
+                buf.Append($"{key}; {value} ");
             }
 
             Assert.AreEqual("One; 1 Two; 22 Three; 3 ", buf.ToString());
@@ -86,6 +89,24 @@ namespace CH21Tests
             var item = hash.Retrieve("B_Two");
 
             item.DisplayItem();
+        }
+
+        [Test]
+        public void MediaTypeToFileImperative()
+        {
+            Assert.That(GetFileNameSwitchStatement(Word), Is.EqualTo(MsWordFileName));
+        }
+
+        [Test]
+        public void MediaTypeToFileExpressive()
+        {
+            Assert.That(GetFileNameDeclarative(Word), Is.EqualTo(MsWordFileName));
+        }
+
+        [Test]
+        public void MediaTypeToFileExpressiveNoDefault()
+        {
+            Assert.Throws<KeyNotFoundException>(() => { _ = GetFileNameDeclarativeNoDefault("bogus"); });
         }
     }
 }
