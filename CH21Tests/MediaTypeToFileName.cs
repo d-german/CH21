@@ -14,7 +14,6 @@ namespace CH21Tests
         public const string Html = MediaTypeNames.Text.Html;
         public const string MultipartForm = "multipart/form-data";
         public const string Pdf = MediaTypeNames.Application.Pdf;
-        public const string PngImage = "image/png";
         public const string Word = "application/msword";
 
         public const string DefaultFileName = "Undefined.png";
