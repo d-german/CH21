@@ -8,25 +8,26 @@ namespace CH21Tests
         /// <summary>
         /// Inserts using custom hash function
         /// </summary>
-        /// <param name="items"></param>
-        /// <param name="item"></param>
+        /// <param name="keys"></param>
+        /// <param name="key"></param>
         /// <typeparam name="T"></typeparam>
-        public static void Insert<T>(this IList<T> items, T item)
+        public static void Insert<T>(this IList<T> keys, T key)
         {
-            var index = Math.Abs(item.GetHashCode()) % items.Count;
-            items[index] = item;
+            // if position is taken it is overwritten, and is called a collision
+            var index = Math.Abs(key.GetHashCode()) % keys.Count;
+            keys[index] = key;
         }
 
         /// <summary>
         /// Retrieves using custom hash function
         /// </summary>
-        /// <param name="items"></param>
-        /// <param name="item"></param>
+        /// <param name="keys"></param>
+        /// <param name="key"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T Retrieve<T>(this IList<T> items, T item)
+        public static T Retrieve<T>(this IList<T> keys, T key)
         {
-            return items[Math.Abs(item.GetHashCode()) % items.Count];
+            return keys[Math.Abs(key.GetHashCode()) % keys.Count];
         }
     }
 }
