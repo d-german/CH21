@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 
 public class Program
@@ -21,10 +22,14 @@ public class Program
 
     private static void Main(string[] args)
     {
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
         Console.WriteLine("....");
         Console.WriteLine(GetFromCache(5));
         Console.WriteLine(GetFromCache(10));
         Console.WriteLine(GetFromCache(5));
         Console.WriteLine(GetFromCache(10));
+        stopwatch.Stop();
+        Console.WriteLine($"Total run time {stopwatch.ElapsedMilliseconds} ms.");
     }
 }
