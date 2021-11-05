@@ -18,7 +18,7 @@ namespace Program
     static class Program
     {
         private static readonly int[] Nums = {1, 2, 3};
-        private static readonly List<Person> Persons = new List<Person>
+        private static readonly List<Person> Persons = new()
         {
             new Person {Name = "Tom", Age = 10},
             new Person {Name = "Dick", Age = 5},
@@ -28,7 +28,7 @@ namespace Program
             new Person {Name = "George", Age = 20}
         };
 
-        private static readonly List<int> Values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
+        private static readonly List<int> Values = new() {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
 
         private static void Main()
         {

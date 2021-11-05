@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using NUnit.Framework;
@@ -18,12 +17,12 @@ namespace CH21Tests
         {
             _persons = new List<Person>
             {
-                new Person { Name = "Tom", Age = 10 },
-                new Person { Name = "Dick", Age = 5 },
-                new Person { Name = "Harry", Age = 5 },
-                new Person { Name = "Mary", Age = 5 },
-                new Person { Name = "Jay", Age = 20 },
-                new Person { Name = "George", Age = 20 }
+                new() { Name = "Tom", Age = 10 },
+                new() { Name = "Dick", Age = 5 },
+                new() { Name = "Harry", Age = 5 },
+                new() { Name = "Mary", Age = 5 },
+                new() { Name = "Jay", Age = 20 },
+                new() { Name = "George", Age = 20 }
             };
 
             _values = new List<int> { 3, 10, 6, 1, 4, 8, 2, 5, 9, 7 };
@@ -55,7 +54,7 @@ namespace CH21Tests
         [Test]
         public void AggregateSumValues()
         {
-            var sum = _values.Aggregate(0, (result, item) => result + item);
+            var sum = _values.Aggregate(0, (result, value) => result + value);
 
             Assert.AreEqual(55, sum);
         }
@@ -63,19 +62,22 @@ namespace CH21Tests
         [Test]
         public void AggregateSumPersonsAges()
         {
-            var sum = _persons.Aggregate(0, (x, p) => x + p.Age);
+            // Adding the age values from each person
+            var sum = _persons.Aggregate(0, (result, person) => result + person.Age);
             Assert.AreEqual(65, sum);
         }
 
         [Test]
         public void AggregateSumValuesPerson()
         {
-            var person = _values.Aggregate(new Person { Age = 0, Name = "Bob" }, (p, n) =>
+            // Accumulate Bobs age starting at 0 using the items in the _values
+            var person = _values.Aggregate(new Person { Age = 0, Name = "Bob" }, (person, value) =>
             {
-                p.Age += n;
-                return p;
+                person.Age += value;
+                return person;
             });
             Assert.AreEqual(55, person.Age);
+            Assert.AreEqual("Bob", person.Name);
         }
 
         [Test]
@@ -148,9 +150,12 @@ namespace CH21Tests
                 .OrderBy(value => value)
                 .Select(n => new Person { Age = n * 2, Name = $"person #{n}" }).ToArray();
 
-            Assert.AreEqual(
-                "[ Name:=person #7, Age=14 ], [ Name:=person #8, Age=16 ], [ Name:=person #9, Age=18 ], [ Name:=person #10, Age=20 ],",
-                query.Dump());
+            const string expected = "Person { Name = person #7, Age = 14 } " +
+                                    "Person { Name = person #8, Age = 16 } " +
+                                    "Person { Name = person #9, Age = 18 } " +
+                                    "Person { Name = person #10, Age = 20 }";
+            var actual = query.Dump();
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -162,9 +167,15 @@ namespace CH21Tests
                 .OrderBy(p => p.BirthYear)
                 .ThenBy(p => p.Name);
 
-            Assert.AreEqual(
-                "{ Name = George, BirthYear = 1998 } { Name = Jay, BirthYear = 1998 } { Name = Tom, BirthYear = 2008 } { Name = Dick, BirthYear = 2013 } { Name = Harry, BirthYear = 2013 } { Name = Mary, BirthYear = 2013 }",
-                query.Dump());
+            const string expected = "{ Name = George, BirthYear = 1998 } " +
+                                    "{ Name = Jay, BirthYear = 1998 } " +
+                                    "{ Name = Tom, BirthYear = 2008 } " +
+                                    "{ Name = Dick, BirthYear = 2013 } " +
+                                    "{ Name = Harry, BirthYear = 2013 } " +
+                                    "{ Name = Mary, BirthYear = 2013 }";
+            var actual = query.Dump();
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -177,9 +188,12 @@ namespace CH21Tests
                 .ThenBy(x => x.person.Age)
                 .Select(x => x.person);
 
-            Assert.AreEqual(
-                "[ Name:=Dick, Age=5 ], [ Name:=Mary, Age=5 ], [ Name:=Harry, Age=5 ], [ Name:=George, Age=20 ],",
-                query.Dump());
+            const string expected = "Person { Name = Dick, Age = 5 } " +
+                                    "Person { Name = Mary, Age = 5 } " +
+                                    "Person { Name = Harry, Age = 5 } " +
+                                    "Person { Name = George, Age = 20 }";
+            var actual = query.Dump();
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -194,9 +208,13 @@ namespace CH21Tests
                     return p;
                 });
 
-            Assert.AreEqual(
-                "[ Name:=Tom, Age=1 ], [ Name:=Dick, Age=2 ], [ Name:=Harry, Age=3 ], [ Name:=Mary, Age=4 ], [ Name:=Jay, Age=5 ],",
-                query.Dump());
+            const string expected = "Person { Name = Tom, Age = 1 } " +
+                                    "Person { Name = Dick, Age = 2 } " +
+                                    "Person { Name = Harry, Age = 3 } " +
+                                    "Person { Name = Mary, Age = 4 } " +
+                                    "Person { Name = Jay, Age = 5 }";
+            var actual = query.Dump();
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -250,18 +268,6 @@ namespace CH21Tests
                     .Select(score => score);
 
             CollectionAssert.AreEqual(q1.ToArray(), q2.ToArray());
-        }
-
-        [Test]
-        public void DeferredExecution()
-        {
-            var numbers = new List<int> { 1 };
-
-            var query = numbers.Select(n => n * 10); // Build query
-
-            numbers.Add(2); // Sneak in an extra element
-
-            Assert.AreEqual("10 20", query.Dump());
         }
 
         [Test]

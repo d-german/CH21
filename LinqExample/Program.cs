@@ -2,7 +2,7 @@
 
 public class Program
 {
-    private static readonly List<int> Values = new List<int> {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
+    private static readonly List<int> Values = new() {3, 10, 6, 1, 4, 8, 2, 5, 9, 7};
 
     private static void Main(string[] args)
     {
