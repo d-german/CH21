@@ -11,13 +11,9 @@ namespace ContentViewTests
         public const string ResultStatusComplete = nameof(ResultStatusComplete);
         private static readonly ICollection<string> AllSupportedUriTypes = new List<string> { ViewerA, ViewerC, ViewerD };
 
-        public ContentView GetContentView(string contentId, ICollection<string> uriTypes)
+        public ContentView GetContentView(string contentId, ICollection<string> requestedUriTypes)
         {
-            if (uriTypes.All(uriType => !AllSupportedUriTypes.Contains(uriType, StringComparer.OrdinalIgnoreCase)))
-            {
-                // If all of the uriTypes requested are not supported, throw an exception
-                throw new Exception("message");
-            }
+            if (requestedUriTypes.All(uriType => !AllSupportedUriTypes.Contains(uriType))) throw new Exception("message");
 
             var uris = new List<string>();
 
@@ -26,7 +22,7 @@ namespace ContentViewTests
             var addedViewerC = false;
             var addedViewerD = false;
 
-            foreach (var uriType in uriTypes)
+            foreach (var uriType in requestedUriTypes)
             {
                 if (IsViewerA(uriType) && !addedViewerA)
                 {

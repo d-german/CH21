@@ -13,52 +13,24 @@ namespace ContentViewTests
 
         private static readonly ImmutableHashSet<string> AllSupportedUriTypes = ImmutableHashSet.Create(ViewerA, ViewerC, ViewerD);
 
-        public ContentView GetContentView(string contentId, ICollection<string> uriTypes)
+        public ContentView GetContentView(string contentId, IReadOnlyCollection<string> requestedUriTypes)
         {
-            if (uriTypes.All(uriType => !AllSupportedUriTypes.Contains(uriType, StringComparer.OrdinalIgnoreCase)))
+            ImmutableHashSet<string> subsetUriTypes = AllSupportedUriTypes.Intersect(requestedUriTypes);
+
+            if (!subsetUriTypes.Any()) throw new Exception("message");
+
+            return new ContentView
             {
-                // If all of the uriTypes requested are not supported, throw an exception
-                throw new Exception("message");
-            }
+                ResultStatus = AllSupportedUriTypes.SetEquals(subsetUriTypes) ? ResultStatusComplete : ResultStatusPartial,
+                Uris = subsetUriTypes.Select(uriType =>
+                {
+                    if (IsViewerA(uriType))
+                    {
+                        return $"https://{ViewerA}/{contentId}";
+                    }
 
-            var uris = new List<string>();
-
-            var hasUnsupportedUriTypes = false;
-            var addedViewerA = false;
-            var addedViewerC = false;
-            var addedViewerD = false;
-
-            foreach (var uriType in uriTypes)
-            {
-                if (IsViewerA(uriType) && !addedViewerA)
-                {
-                    uris.Add($"https://{ViewerA}/{contentId}");
-                    addedViewerA = true;
-                }
-                else if (IsViewerB(uriType))
-                {
-                    hasUnsupportedUriTypes = true;
-                }
-                else if (IsViewerC(uriType) && !addedViewerC)
-                {
-                    uris.Add($"https://{ViewerC}/{contentId}");
-                    addedViewerC = true;
-                }
-                else if (IsViewerD(uriType) && !addedViewerD)
-                {
-                    uris.Add($"https://{ViewerD}/{contentId}");
-                    addedViewerD = true;
-                }
-                else
-                {
-                    // ignore duplicate values
-                }
-            }
-
-            return new ContentView()
-            {
-                Uris = uris,
-                ResultStatus = hasUnsupportedUriTypes ? ResultStatusPartial : ResultStatusComplete
+                    return IsViewerC(uriType) ? $"https://{ViewerC}/{contentId}" : $"https://{ViewerD}/{contentId}";
+                })
             };
         }
     }
