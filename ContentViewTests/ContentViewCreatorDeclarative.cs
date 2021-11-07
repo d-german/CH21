@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using static ContentViewTests.UriType;
 
@@ -9,7 +10,8 @@ namespace ContentViewTests
     {
         public const string ResultStatusPartial = nameof(ResultStatusPartial);
         public const string ResultStatusComplete = nameof(ResultStatusComplete);
-        private static readonly ICollection<string> AllSupportedUriTypes = new List<string> { ViewerA, ViewerC, ViewerD };
+
+        private static readonly ImmutableHashSet<string> AllSupportedUriTypes = ImmutableHashSet.Create(ViewerA, ViewerC, ViewerD);
 
         public ContentView GetContentView(string contentId, ICollection<string> uriTypes)
         {
