@@ -14,8 +14,7 @@ namespace CH21Tests
         public static void Insert<T>(this IList<T> keys, T key)
         {
             // if position is taken it is overwritten, and is called a collision
-            var index = Math.Abs(key.GetHashCode()) % keys.Count;
-            keys[index] = key;
+            keys[Math.Abs(key.GetHashCode()) % keys.Count] = key;
         }
 
         /// <summary>

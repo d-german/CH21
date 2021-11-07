@@ -67,26 +67,26 @@ namespace CH21Tests
         [Test]
         public void HashToIndexTest()
         {
-            var hash = new string[8];
-            hash.Insert("A_One");
-            hash.Insert("B_Two");
-            hash.Insert("C_Three");
-            hash.Insert("D_Four");
-            hash.Insert("E_Five");
-            hash.Insert("F_Six");
-            hash.Insert("G_Seven");
-            hash.Insert("H_Eight");
-            hash.Insert("I_Nine");
-            hash.Insert("J_Ten");
-            hash.Insert("K_Eleven");
+            var hashSet = new string[8];
+            hashSet.Insert("A_One");
+            hashSet.Insert("B_Two");
+            hashSet.Insert("C_Three");
+            hashSet.Insert("D_Four");
+            hashSet.Insert("E_Five");
+            hashSet.Insert("F_Six");
+            hashSet.Insert("G_Seven");
+            hashSet.Insert("H_Eight");
+            hashSet.Insert("I_Nine");
+            hashSet.Insert("J_Ten");
+            hashSet.Insert("K_Eleven");
 
-            _ = hash
+            _ = hashSet
                 .Display(i => i ?? "-")
                 .Where(n => !string.IsNullOrEmpty(n))
                 .OrderBy(n => n)
                 .Display();
 
-            var item = hash.Retrieve("B_Two");
+            var item = hashSet.Retrieve("B_Two");
 
             item.DisplayItem();
         }
