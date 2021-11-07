@@ -4,34 +4,34 @@ namespace ContentViewTests
 {
     public static class UriType
     {
-        public const string Bytes = "Bytes";
-        public const string Viewer = "Viewer";
-        public const string FullBytes = "FullBytes";
-        public const string Thumbnail = "Thumbnail";
+        public const string ViewerA = nameof(ViewerA);
+        public const string ViewerB = nameof(ViewerB);
+        public const string ViewerC = nameof(ViewerC);
+        public const string ViewerD = nameof(ViewerD);
 
         public static bool IsValid(string uriType)
         {
-            return IsViewer(uriType) || IsBytes(uriType) || IsFullBytes(uriType) || IsThumbnail(uriType);
+            return IsViewerB(uriType) || IsViewerA(uriType) || IsViewerC(uriType) || IsViewerD(uriType);
         }
 
-        public static bool IsThumbnail(string uriType)
+        public static bool IsViewerA(string uriType)
         {
-            return string.Equals(uriType, Thumbnail, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(uriType, ViewerA, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool IsFullBytes(string uriType)
+        public static bool IsViewerB(string uriType)
         {
-            return string.Equals(uriType, FullBytes, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(uriType, ViewerB, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool IsViewer(string uriType)
+        public static bool IsViewerC(string uriType)
         {
-            return string.Equals(uriType, Viewer, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(uriType, ViewerC, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool IsBytes(string uriType)
+        public static bool IsViewerD(string uriType)
         {
-            return string.Equals(uriType, Bytes, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(uriType, ViewerD, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
