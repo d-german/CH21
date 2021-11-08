@@ -20,7 +20,7 @@ namespace CH21Tests
         public const string Word = "application/msword";
 
         public const string DefaultFileName = "Undefined.png";
-        public const string DicomStudyPngFileName = "DICOMStudy.png";
+        public const string DicomStudyFileName = "DICOMStudy.png";
         public const string MsExcelFileName = "MsExcel.png";
         public const string HtmlFileName = "HTML.png";
         public const string ElectronicFormFileName = "ElectronicForm.png";
@@ -29,7 +29,7 @@ namespace CH21Tests
 
         private static readonly IDictionary<string, string> ToFileName = new Dictionary<string, string>
         {
-            [Dicom] = DicomStudyPngFileName,
+            [Dicom] = DicomStudyFileName,
             [Excel] = MsExcelFileName,
             [Html] = HtmlFileName,
             [MultipartForm] = ElectronicFormFileName,
@@ -47,7 +47,7 @@ namespace CH21Tests
             switch (mediaType)
             {
                 case Dicom:
-                    return DicomStudyPngFileName;
+                    return DicomStudyFileName;
                 case Excel:
                     return MsExcelFileName;
                 case Html:
@@ -66,7 +66,7 @@ namespace CH21Tests
         public static string GetFileNameImperativeMultipleIf(string mediaType)
         {
             if (mediaType == Dicom)
-                return DicomStudyPngFileName;
+                return DicomStudyFileName;
             if (mediaType == Excel)
                 return MsExcelFileName;
             if (mediaType == Html)
@@ -86,7 +86,7 @@ namespace CH21Tests
             // Beginning with C# 8.0, you can use the switch expression
             return mediaType switch
             {
-                Dicom => DicomStudyPngFileName,
+                Dicom => DicomStudyFileName,
                 Excel => MsExcelFileName,
                 Html => HtmlFileName,
                 MultipartForm => ElectronicFormFileName,

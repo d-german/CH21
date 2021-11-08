@@ -10,19 +10,14 @@ namespace ContentViewTests
     {
         private const string ContentId = nameof(ContentId);
 
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void GetContentViewImperativePartialDuplicatesTest()
         {
-            var actual = ContentViewCreatorImperative.GetContentView(ContentId, new List<string> { ViewerA, ViewerA, ViewerB }); // viewerB is not supported
+            var actual = GetContentView(ContentId, new List<string> { ViewerA, ViewerA, ViewerB }); // viewerB is not supported
             var expected = new ContentView
             {
                 ResultStatus = ResultStatusPartial,
-                Uris = new List<string>() { $"https://{ViewerA}/{ContentId}" }
+                Uris = new List<string> { $"https://{ViewerA}/{ContentId}" }
             };
 
             Assert.AreEqual(actual.ResultStatus, expected.ResultStatus);
@@ -32,12 +27,11 @@ namespace ContentViewTests
         [Test]
         public void GetContentViewImperativeCompleteTest()
         {
-            var sut = new ContentViewCreatorImperative();
-            var actual = sut.GetContentView(ContentId, new List<string> { ViewerA, ViewerC, ViewerD }); // viewerB is not supported
+            var actual = GetContentView(ContentId, new List<string> { ViewerA, ViewerC, ViewerD }); // viewerB is not supported
             var expected = new ContentView
             {
                 ResultStatus = ResultStatusComplete,
-                Uris = new List<string>()
+                Uris = new List<string>
                 {
                     $"https://{ViewerA}/{ContentId}",
                     $"https://{ViewerC}/{ContentId}",
@@ -52,23 +46,20 @@ namespace ContentViewTests
         [Test]
         public void GetContentViewImperativeExceptionTest()
         {
-            var sut = new ContentViewCreatorImperative();
-
             Assert.Throws<Exception>(() =>
             {
-                _ = sut.GetContentView(ContentId, new List<string> { ViewerB }); // viewerB is not supported
+                _ = GetContentView(ContentId, new List<string> { ViewerB }); // viewerB is not supported
             });
         }
 
         [Test]
         public void GetContentViewDeclarativePartialDuplicatesTest()
         {
-            var sut = new ContentViewCreatorDeclarative();
             var actual = ContentViewCreatorDeclarative.GetContentView(ContentId, new List<string> { ViewerA, ViewerA, ViewerB }); // viewerB is not supported
             var expected = new ContentView
             {
                 ResultStatus = ResultStatusPartial,
-                Uris = new List<string>() { $"https://{ViewerA}/{ContentId}" }
+                Uris = new List<string> { $"https://{ViewerA}/{ContentId}" }
             };
 
             Assert.AreEqual(actual.ResultStatus, expected.ResultStatus);
@@ -78,12 +69,11 @@ namespace ContentViewTests
         [Test]
         public void GetContentViewDeclarativeCompleteTest()
         {
-            var sut = new ContentViewCreatorImperative();
-            var actual = sut.GetContentView(ContentId, new List<string> { ViewerA, ViewerC, ViewerD }); // viewerB is not supported
+            var actual = GetContentView(ContentId, new List<string> { ViewerA, ViewerC, ViewerD }); // viewerB is not supported
             var expected = new ContentView
             {
                 ResultStatus = ResultStatusComplete,
-                Uris = new List<string>()
+                Uris = new List<string>
                 {
                     $"https://{ViewerA}/{ContentId}",
                     $"https://{ViewerC}/{ContentId}",
@@ -98,11 +88,9 @@ namespace ContentViewTests
         [Test]
         public void GetContentViewDeclarativeExceptionTest()
         {
-            var sut = new ContentViewCreatorImperative();
-
             Assert.Throws<Exception>(() =>
             {
-                _ = sut.GetContentView(ContentId, new List<string> { ViewerB }); // viewerB is not supported
+                _ = GetContentView(ContentId, new List<string> { ViewerB }); // viewerB is not supported
             });
         }
     }
