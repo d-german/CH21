@@ -30,8 +30,14 @@ namespace ContentViewTests
                     {
                         return $"https://{ViewerA}/{contentId}";
                     }
-
-                    return IsViewerC(uriType) ? $"https://{ViewerC}/{contentId}" : $"https://{ViewerD}/{contentId}";
+                    else if (IsViewerC(uriType))
+                    {
+                        return $"https://{ViewerC}/{contentId}";
+                    }
+                    else
+                    {
+                        return $"https://{ViewerD}/{contentId}";
+                    }
                 })
             };
         }
