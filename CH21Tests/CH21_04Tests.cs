@@ -94,7 +94,7 @@ namespace CH21Tests
         [Test]
         public void MediaTypeToFileImperative()
         {
-            Assert.That(GetFileNameSwitchStatement(Word), Is.EqualTo(MsWordFileName));
+            Assert.That(GetFileNameImperativeSwitchStatement(Word), Is.EqualTo(MsWordFileName));
         }
 
         [Test]

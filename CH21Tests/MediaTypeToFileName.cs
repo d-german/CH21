@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Mime;
 
@@ -34,9 +35,14 @@ namespace CH21Tests
             [MultipartForm] = ElectronicFormFileName,
             [Pdf] = PdfFileName,
             [Word] = MsWordFileName
-        };
+        }.ToImmutableDictionary();
 
-        public static string GetFileNameSwitchStatement(string mediaType)
+        public static string GetFileNameDeclarative(string mediaType)
+        {
+            return ToFileName.ContainsKey(mediaType) ? ToFileName[mediaType] : DefaultFileName;
+        }
+
+        public static string GetFileNameImperativeSwitchStatement(string mediaType)
         {
             switch (mediaType)
             {
@@ -57,7 +63,7 @@ namespace CH21Tests
             }
         }
 
-        public static string GetFileNameImperative(string mediaType)
+        public static string GetFileNameImperativeMultipleIf(string mediaType)
         {
             if (mediaType == Dicom)
                 return DicomStudyPngFileName;
@@ -90,10 +96,6 @@ namespace CH21Tests
             };
         }
 
-        public static string GetFileNameDeclarative(string mediaType)
-        {
-            return ToFileName.ContainsKey(mediaType) ? ToFileName[mediaType] : DefaultFileName;
-        }
 
         public static string GetFileNameDeclarativeNoDefault(string mediaType)
         {
