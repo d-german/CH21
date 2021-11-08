@@ -13,8 +13,8 @@ namespace ContentViewTests
 
         private static readonly ICollection<string> AllSupportedUriTypes = new List<string> { ViewerA, ViewerC, ViewerD };
 
-        // Cyclomatic complexity 9
-        public ContentView GetContentView(string contentId, ICollection<string> requestedUriTypes)
+        // Cyclomatic complexity 11
+        public static ContentView GetContentView(string contentId, ICollection<string> requestedUriTypes)
         {
             if (requestedUriTypes.All(uriType => !AllSupportedUriTypes.Contains(uriType))) throw new Exception("message");
 
