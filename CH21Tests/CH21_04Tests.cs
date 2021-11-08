@@ -64,6 +64,7 @@ namespace CH21Tests
             Assert.AreEqual("1223", buf.ToString());
         }
 
+        // ************** Explain SSN example and LoadFactor ***********************
         [Test]
         public void HashToIndexTest()
         {
@@ -86,9 +87,9 @@ namespace CH21Tests
                 .OrderBy(n => n)
                 .Display();
 
-            var item = hashSet.Retrieve("B_Two");
-
-            item.DisplayItem();
+            // var item = hashSet.Retrieve("B_Two");
+            //
+            // item.DisplayItem();
         }
 
         [Test]
