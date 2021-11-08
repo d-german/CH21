@@ -4,6 +4,8 @@ using System.Collections.Immutable;
 using System.Linq;
 using static ContentViewTests.UriType;
 
+// ReSharper disable All
+
 namespace ContentViewTests
 {
     public class ContentViewCreatorDeclarative
@@ -13,7 +15,7 @@ namespace ContentViewTests
 
         private static readonly ImmutableHashSet<string> AllSupportedUriTypes = ImmutableHashSet.Create(ViewerA, ViewerC, ViewerD);
 
-        public ContentView GetContentView(string contentId, IReadOnlyCollection<string> requestedUriTypes)
+        public static ContentView GetContentView(string contentId, IReadOnlyCollection<string> requestedUriTypes)
         {
             ImmutableHashSet<string> subsetUriTypes = AllSupportedUriTypes.Intersect(requestedUriTypes);
 

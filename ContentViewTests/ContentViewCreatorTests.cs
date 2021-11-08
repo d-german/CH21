@@ -65,7 +65,7 @@ namespace ContentViewTests
         public void GetContentViewDeclarativePartialDuplicatesTest()
         {
             var sut = new ContentViewCreatorDeclarative();
-            var actual = sut.GetContentView(ContentId, new List<string> { ViewerA, ViewerA, ViewerB }); // viewerB is not supported
+            var actual = ContentViewCreatorDeclarative.GetContentView(ContentId, new List<string> { ViewerA, ViewerA, ViewerB }); // viewerB is not supported
             var expected = new ContentView
             {
                 ResultStatus = ResultStatusPartial,

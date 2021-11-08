@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Mime;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -7,6 +8,7 @@ using System.Net.Mime;
 // ReSharper disable ConvertSwitchStatementToSwitchExpression
 namespace CH21Tests
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class MediaTypeToFileName
     {
         public const string Dicom = "application/vnd.hyland.nilread.apiviewer+dicom";
