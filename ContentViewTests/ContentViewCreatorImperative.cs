@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using static ContentViewTests.UriType;
+// ReSharper disable All
 
 namespace ContentViewTests
 {
@@ -9,6 +10,7 @@ namespace ContentViewTests
     {
         public const string ResultStatusPartial = nameof(ResultStatusPartial);
         public const string ResultStatusComplete = nameof(ResultStatusComplete);
+
         private static readonly ICollection<string> AllSupportedUriTypes = new List<string> { ViewerA, ViewerC, ViewerD };
 
         // Cyclomatic complexity 9
