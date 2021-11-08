@@ -96,7 +96,6 @@ namespace CH21Tests
             };
         }
 
-
         public static string GetFileNameDeclarativeNoDefault(string mediaType)
         {
             return ToFileName[mediaType];
