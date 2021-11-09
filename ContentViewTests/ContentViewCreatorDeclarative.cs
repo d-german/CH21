@@ -15,7 +15,7 @@ namespace ContentViewTests
 
         private static readonly ImmutableHashSet<string> AllSupportedUriTypes = ImmutableHashSet.Create(ViewerA, ViewerC, ViewerD);
 
-        // Cyclomatic Complexity 5
+        // Cognitive Complexity 5
         public static ContentView GetContentView(string contentId, IReadOnlyCollection<string> requestedUriTypes)
         {
             ImmutableHashSet<string> subsetUriTypes = AllSupportedUriTypes.Intersect(requestedUriTypes);
