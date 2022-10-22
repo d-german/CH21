@@ -20,7 +20,7 @@ public class Program
         return ExpensiveCalculation(item);
     }
 
-    private static void Main(string[] args)
+    private static void Main()
     {
         var stopwatch = new Stopwatch();
         stopwatch.Start();

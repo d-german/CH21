@@ -2,7 +2,7 @@
 {
     internal record Person
     {
-        public string Name { get; set; }
+        public string Name { get; init; }
         public int Age { get; set; }
 
         // public override string ToString()

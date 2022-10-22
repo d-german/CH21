@@ -5,28 +5,22 @@ namespace CH21Tests
 {
     public static class HashHelpers
     {
-        /// <summary>
-        /// Inserts using custom hash function
-        /// </summary>
-        /// <param name="keys"></param>
-        /// <param name="key"></param>
-        /// <typeparam name="T"></typeparam>
-        public static void Insert<T>(this IList<T> keys, T key)
+        private static int HashFunction<T>(int hashSize, T value)
         {
-            // if position is taken it is overwritten, and is called a collision
-            keys[Math.Abs(key.GetHashCode()) % keys.Count] = key;
+            return Math.Abs(value.GetHashCode()) % hashSize;
         }
 
-        /// <summary>
-        /// Retrieves using custom hash function
-        /// </summary>
-        /// <param name="keys"></param>
-        /// <param name="key"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T Retrieve<T>(this IList<T> keys, T key)
+        public static void Insert<T>(this IList<T> values, T value)
         {
-            return keys[Math.Abs(key.GetHashCode()) % keys.Count];
+            // if position is taken it is overwritten, and is called a collision
+            var position = HashFunction(values.Count, value);
+            values[position] = value;
+        }
+
+        public static T Retrieve<T>(this IList<T> values, T value)
+        {
+            var position = HashFunction(values.Count, value);
+            return values[position];
         }
     }
 }

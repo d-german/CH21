@@ -6,8 +6,8 @@ namespace Program
 {
     internal class Person
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public string Name { get; init; }
+        public int Age { get; init; }
 
         public override string ToString()
         {
@@ -15,7 +15,7 @@ namespace Program
         }
     }
 
-    static class Program
+    internal static class Program
     {
         private static readonly int[] Nums = {1, 2, 3};
         private static readonly List<Person> Persons = new()
